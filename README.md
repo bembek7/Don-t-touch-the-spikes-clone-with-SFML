@@ -12,8 +12,8 @@ Mechaniki do zaimplementowania:
 -stworzenia ptaka i poddanie go grawitacji,
 -sprawienie, żeby ptak leciał do ściany i odbijał się od niej,
 -input gracza - wyrzucenie ptaka w górę,
--generowanie kolców po odbiciu, zawsze tak, by gracz miał możliwość odbicia.
--zwiększanie prędkości gracza po każdym odbiciu
+-generowanie kolców po odbiciu, zawsze tak, by gracz miał możliwość odbicia,
+-zwiększanie prędkości gracza po każdym odbiciu.
 
 Technologia, której używamy:
 
