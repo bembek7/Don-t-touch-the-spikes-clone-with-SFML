@@ -1,28 +1,28 @@
 #include <SFML/Graphics.hpp>
+#include "Player.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(300, 500), "SFML works!");
-    float radius = 20.f;
-    sf::CircleShape shape(radius);
-    shape.setFillColor(sf::Color::Green);
-    float dir = 1.f;
-    float speed = 0.25f;
+    sf::RenderWindow window(sf::VideoMode(400, 700), "Test");
+    sf::Texture playerTexture;
+    playerTexture.loadFromFile("Knight.png");
+    Player player(playerTexture);
+    float deltaTime = 0.0f;
+    sf::Clock clock;
     while (window.isOpen())
     {
+        deltaTime = clock.restart().asSeconds();
+
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
+        player.Update(deltaTime, window.getSize().x);
         
-        shape.move(dir*speed,0);
-        if(shape.getPosition().x + radius*2 >= window.getSize().x || shape.getPosition().x <= 0) dir *= -1;
-
-        window.clear();
-        window.draw(shape);
+        window.clear(sf::Color(0,255,0,255));
+        player.Draw(window);
         window.display();
     }
 

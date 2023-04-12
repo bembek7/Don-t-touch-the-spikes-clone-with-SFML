@@ -22,5 +22,7 @@ Mechaniki do zaimplementowania:
 
 -zwiększanie prędkości gracza po każdym odbiciu.
 
-Technologia, której używamy:
+-zapis/odczyt do/z pliku
+
+Technologia, której używamy: biblioteka SFML
 
