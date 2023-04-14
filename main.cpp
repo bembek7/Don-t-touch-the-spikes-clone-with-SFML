@@ -8,11 +8,14 @@ static const float width = 400;
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(width, height), "Test", sf::Style::Titlebar | sf::Style::Close);
+    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    window.setPosition(sf::Vector2i(desktop.width / 2 - width / 2, desktop.height / 2 - height / 2));
     sf::Texture playerTexture;
     playerTexture.loadFromFile("Knight.png");
     Player player(playerTexture);
     float deltaTime = 0.0f;
     sf::Clock clock;
+
     while (window.isOpen())
     {
         deltaTime = clock.restart().asSeconds();
