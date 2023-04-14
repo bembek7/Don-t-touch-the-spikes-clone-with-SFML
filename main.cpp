@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.hpp"
 
-static const float height = 700;
+static const float height = 600;
 static const float width = 400;
 
 
