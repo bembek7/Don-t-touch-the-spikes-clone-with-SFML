@@ -1,11 +1,10 @@
 #include "Player.hpp"
 
-void Player::Update(const float& deltaTime, const float& windowWidth)
+void Player::Update(const float& deltaTime, const float& windowWidth, const float& windowHeight)
 {
     sf::Vector2f velocity(1.0f, 0.0f);
     velocity.x *= dir;
     velocity.x *= speed;
-    speed += 0*windowWidth;
     if(sprite.getPosition().x + sprite.getTextureRect().width * std::abs(sprite.getScale().x) >= windowWidth && flipToLeft)
     {
         flipToLeft = false;
@@ -22,6 +21,10 @@ void Player::Update(const float& deltaTime, const float& windowWidth)
         sprite.move(sprite.getTextureRect().width * sprite.getScale().x * -1, 0.f);
         flipToLeft = true;
     }
+
+    // has to be last, probably won't be needed after adding spikes on the bottom
+    if(sprite.getPosition().y + sprite.getTextureRect().height * sprite.getScale().y + gravity * deltaTime < windowHeight)
+        velocity.y += gravity;
     sprite.move(velocity * deltaTime);
 }
 
