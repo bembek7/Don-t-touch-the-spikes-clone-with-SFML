@@ -8,7 +8,7 @@ public:
     Player(const sf::Texture& tex)
     {
         sprite.setTexture(tex);
-        sprite.setScale(0.05f, 0.05f);
+        sprite.setScale(0.06f, 0.06f);
         sprite.setPosition(0.f,0.f);
     }
 

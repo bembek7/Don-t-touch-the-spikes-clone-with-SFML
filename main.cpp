@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Player.hpp"
+#include "Spike.hpp"
 
 static const float height = 600;
 static const float width = 400;
@@ -13,6 +14,9 @@ int main()
     sf::Texture playerTexture;
     playerTexture.loadFromFile("Knight.png");
     Player player(playerTexture);
+    sf::Texture spikeTexture;
+    spikeTexture.loadFromFile("Pawn.png");
+    Spike spike(spikeTexture);
     float deltaTime = 0.0f;
     sf::Clock clock;
 
@@ -27,8 +31,10 @@ int main()
                 window.close();
         }
         player.Update(deltaTime, width, height);
+        //spike.Update(deltaTime, width, height);
         window.clear(sf::Color(0,255,0,255));
         player.Draw(window);
+        spike.Draw(window);
         window.display();
     }
 
