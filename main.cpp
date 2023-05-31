@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.hpp"
 #include "Spike.hpp"
+#include "Level.hpp"
 
 static const float height = 600;
 static const float width = 400;
@@ -16,7 +17,7 @@ int main()
     Player player(playerTexture);
     sf::Texture spikeTexture;
     spikeTexture.loadFromFile("Pawn.png");
-    Spike spike(spikeTexture, sf::Vector2f(0,0));
+    Level level(spikeTexture, width, height);
     float deltaTime = 0.0f;
     sf::Clock clock;
 
@@ -31,10 +32,10 @@ int main()
                 window.close();
         }
         player.Update(deltaTime, width, height);
-        if(spike.PlayerHit(player.GetCollider()))player.Die();
+        //if(spike.PlayerHit(player.GetCollider()))player.Die();
         window.clear(sf::Color(0,255,0,255));
+        level.DrawLowerSpikes(window);
         player.Draw(window);
-        spike.Draw(window);
         window.display();
     }
 
