@@ -9,7 +9,7 @@ public:
     Spike(const sf::Texture& tex, const sf::Vector2f& pos)
     {
         sprite.setTexture(tex);
-        scaleFactor = targetWidth / sprite.getLocalBounds().width;
+        scaleFactor = width / sprite.getLocalBounds().width;
         sprite.setScale(scaleFactor, scaleFactor);
         sprite.setPosition(pos);
         collider = BoxCollider(pos.x, pos.y, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
@@ -20,9 +20,9 @@ public:
 private:
     BoxCollider collider;
     sf::Sprite sprite;
-    unsigned int width;
+    unsigned int width = 25;
     float scaleFactor;
-    float targetWidth = 25.f;
+    //float targetWidth = 25.f;
 };
 
 #endif // SPIKE_H
