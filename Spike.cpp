@@ -1,5 +1,4 @@
 #include "Spike.hpp"
-#include "Player.hpp"
 
 bool Spike::PlayerHit(const BoxCollider &playerCollider) const
 {

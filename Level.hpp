@@ -4,6 +4,7 @@
 #include <vector>
 #include "Spike.hpp"
 #include "BoxCollider.hpp"
+#include "Player.hpp"
 
 class Level
 {
@@ -20,6 +21,7 @@ public:
     void CreateLowerSpikes();
     //void DrawUpperSpikes();
     void DrawLowerSpikes(sf::RenderWindow &window) const;
+    void CheckCollison(Player& player) const;
 
 private:
     sf::Texture tex;

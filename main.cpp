@@ -32,8 +32,8 @@ int main()
                 window.close();
         }
         player.Update(deltaTime, width, height);
-        //if(spike.PlayerHit(player.GetCollider()))player.Die();
         window.clear(sf::Color(0,255,0,255));
+        level.CheckCollison(player);
         level.DrawLowerSpikes(window);
         player.Draw(window);
         window.display();

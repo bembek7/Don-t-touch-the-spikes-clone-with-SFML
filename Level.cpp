@@ -27,3 +27,16 @@ void Level::DrawLowerSpikes(sf::RenderWindow &window) const
         spike.Draw(window);
     }
 }
+
+void Level::CheckCollison(Player &player) const
+{
+    for (auto& spike : lowerSpikes)
+    {
+        if(spike.PlayerHit(player.GetCollider()))
+        {
+            player.Die();
+            return;
+        }
+    }
+    // kolejne pętle z bocznymi i górną
+}
