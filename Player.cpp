@@ -1,7 +1,12 @@
 #include "Player.hpp"
 #include <math.h>
+#include <iostream>
 
-void Player::Update(const float& deltaTime, const float& windowWidth, const float& windowHeight)
+BoxCollider Player::GetCollider() const
+{
+    return collider;
+}
+void Player::Update(const float &deltaTime, const float &windowWidth, const float &windowHeight)
 {
     timeFromLastJump += deltaTime;
     sf::Vector2f velocity(1.0f, 0.0f);
@@ -58,9 +63,15 @@ void Player::Update(const float& deltaTime, const float& windowWidth, const floa
     if(sprite.getPosition().y + sprite.getTextureRect().height * sprite.getScale().y + gravity * deltaTime < windowHeight)
         velocity.y += gravity;
     sprite.move(velocity * deltaTime);
+    collider.SetPosition(sprite.getPosition().x, sprite.getPosition().y);
 }
 
 void Player::Draw(sf::RenderWindow& window) const
 {
     window.draw(sprite);
+}
+
+void Player::Die()
+{   
+    std::cout<<"Player died!"<<std::endl;
 }

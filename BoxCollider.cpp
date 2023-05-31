@@ -8,8 +8,8 @@ void BoxCollider::SetPosition(const int &X, const int &Y)
 
 bool BoxCollider::CheckCollision(const BoxCollider &otherCollider) const
 {   
-    bool xOverlap = x + width >= otherCollider.GetPosition().x && otherCollider.GetPosition().x + otherCollider.GetWidth() >= x;
-    bool yOverlap = y + height >= otherCollider.GetPosition().y && otherCollider.GetPosition().y + otherCollider.height >= y;
+    bool xOverlap = int(x + width) >= otherCollider.GetPosition().x && int(otherCollider.GetPosition().x + otherCollider.GetWidth()) >= x;
+    bool yOverlap = int(y + height) >= otherCollider.GetPosition().y && int(otherCollider.GetPosition().y + otherCollider.height) >= y;
 
     return xOverlap && yOverlap;
 }
