@@ -1,6 +1,5 @@
 #include "Spike.hpp"
 #include "Player.hpp"
-//void Spike::Update(const float& deltaTime, const float& windowWidth, const float& windowHeight){}
 
 bool Spike::PlayerHit(const BoxCollider &playerCollider) const
 {
@@ -10,4 +9,20 @@ bool Spike::PlayerHit(const BoxCollider &playerCollider) const
 void Spike::Draw(sf::RenderWindow &window) const
 {
     window.draw(sprite);
+}
+
+void Spike::SetPosition(const sf::Vector2f& pos)
+{
+    sprite.setPosition(pos);
+    collider = BoxCollider(pos.x, pos.y, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
+}
+
+float Spike::GetHeight()
+{
+    return height;
+}
+
+unsigned int Spike::GetWidth()
+{
+    return width;
 }

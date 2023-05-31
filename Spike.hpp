@@ -6,23 +6,25 @@
 class Spike
 {
 public:
-    Spike(const sf::Texture& tex, const sf::Vector2f& pos)
+    Spike(const sf::Texture& tex)
     {
         sprite.setTexture(tex);
         scaleFactor = width / sprite.getLocalBounds().width;
         sprite.setScale(scaleFactor, scaleFactor);
-        sprite.setPosition(pos);
-        collider = BoxCollider(pos.x, pos.y, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
+        height = sprite.getGlobalBounds().height;
     }
     bool PlayerHit(const BoxCollider& playerCollider) const;
-    //void Update(const float& deltaTime, const float& windowWidth, const float& windowHeight);
     void Draw(sf::RenderWindow& window) const;
+    static unsigned int GetWidth();
+    float GetHeight();
+    void SetPosition(const sf::Vector2f& pos);
+
 private:
     BoxCollider collider;
     sf::Sprite sprite;
-    unsigned int width = 25;
+    static const unsigned int width = 25;
     float scaleFactor;
-    //float targetWidth = 25.f;
+    float height;
 };
 
 #endif // SPIKE_H
