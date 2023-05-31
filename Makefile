@@ -12,4 +12,4 @@ tests:
 
 
 clean:
-	rm main.o Player.o sfml-app
+	rm main.o *.o sfml-app
