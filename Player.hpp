@@ -10,7 +10,7 @@ public:
     {
         sprite.setTexture(tex);
         sprite.setScale(0.06f, 0.06f);
-        sprite.setPosition(0.f,0.f);
+        sprite.setPosition(200.f,300.f);
         collider = BoxCollider(0, 0, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
     }
     BoxCollider GetCollider()const;

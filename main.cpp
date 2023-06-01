@@ -19,6 +19,7 @@ int main()
     spikeTexture.loadFromFile("Pawn.png");
     Level level(spikeTexture, width, height);
     float deltaTime = 0.0f;
+    bool startGame = false;
     sf::Clock clock;
 
     while (window.isOpen())
@@ -29,14 +30,36 @@ int main()
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
+            {
                 window.close();
+            }
+
+            if (event.type == sf::Event::MouseButtonPressed)
+            {
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
+                    startGame = true;
+                }
+            }  
         }
+
+        if (!startGame)
+        {
+            window.clear(sf::Color(0,255,0,255));
+            level.Draw(window);
+            player.Draw(window);
+            window.display();
+            // Poczekaj, aż gracz wciśnie lewy przycisk myszy
+            continue;
+        }
+
         player.Update(deltaTime, width, height);
         window.clear(sf::Color(0,255,0,255));
         level.CheckCollison(player);
         level.Draw(window);
         player.Draw(window);
         window.display();
+        
     }
 
     return 0;
