@@ -14,16 +14,15 @@ public:
         tex = spikeTexture;
         mapWidth = width;
         mapHeight = height;
-        this->CreateLowerSpikes();
-        //this->CreateUpperSpikes();
+        CreateUpperLowerSpikes();
     }
-    //void CreateUpperSpikes();
-    void CreateLowerSpikes();
-    //void DrawUpperSpikes();
+    void DrawUpperSpikes(sf::RenderWindow &window) const;
     void DrawLowerSpikes(sf::RenderWindow &window) const;
+    void Draw(sf::RenderWindow &window) const;
     void CheckCollison(Player& player) const;
 
 private:
+    void CreateUpperLowerSpikes();
     sf::Texture tex;
     float mapWidth;
     float mapHeight;

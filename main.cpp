@@ -34,7 +34,7 @@ int main()
         player.Update(deltaTime, width, height);
         window.clear(sf::Color(0,255,0,255));
         level.CheckCollison(player);
-        level.DrawLowerSpikes(window);
+        level.Draw(window);
         player.Draw(window);
         window.display();
     }

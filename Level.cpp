@@ -1,23 +1,12 @@
 #include "Spike.hpp"
 #include "Level.hpp"
 
-void Level::CreateLowerSpikes()
+void Level::DrawUpperSpikes(sf::RenderWindow &window) const
 {
-    float tempWidth = mapWidth;
-    while (tempWidth > 0)
+    for (auto& spike : upperSpikes)
     {
-        Spike spike(tex);
-        lowerSpikes.push_back(spike);
-        tempWidth -= float(Spike::GetWidth());
+        spike.Draw(window);
     }
-    tempWidth = 0;
-
-    for (auto& spike : lowerSpikes)
-    {
-        spike.SetPosition(sf::Vector2f(tempWidth, mapHeight - spike.GetHeight()));
-        tempWidth += float(spike.GetWidth());
-    }
-    
 }
 
 void Level::DrawLowerSpikes(sf::RenderWindow &window) const
@@ -26,6 +15,12 @@ void Level::DrawLowerSpikes(sf::RenderWindow &window) const
     {
         spike.Draw(window);
     }
+}
+
+void Level::Draw(sf::RenderWindow &window) const
+{
+    DrawLowerSpikes(window);
+    DrawUpperSpikes(window);
 }
 
 void Level::CheckCollison(Player &player) const
@@ -38,5 +33,43 @@ void Level::CheckCollison(Player &player) const
             return;
         }
     }
-    // kolejne pętle z bocznymi i górną
+
+    for (auto& spike : upperSpikes)
+    {
+        if(spike.PlayerHit(player.GetCollider()))
+        {
+            player.Die();
+            return;
+        }
+    }
+    // kolejne pętle z bocznymi
+}
+
+void Level::CreateUpperLowerSpikes()
+{
+    float tempWidth = mapWidth;
+    while (tempWidth > 0)
+    {
+        Spike lowspike(tex);
+        Spike upspike(tex);
+        lowerSpikes.push_back(lowspike);
+        upperSpikes.push_back(upspike);
+        tempWidth -= float(lowspike.GetWidth());
+    }
+    tempWidth = 0;
+
+    for (auto& spike : lowerSpikes)
+    {
+        spike.SetPosition(sf::Vector2f(tempWidth, mapHeight - spike.GetHeight()));
+        tempWidth += float(spike.GetWidth());
+    }
+
+    tempWidth = 0;
+
+    for (auto& spike : upperSpikes)
+    {
+        spike.SetPosition(sf::Vector2f(tempWidth, spike.GetHeight()));
+        spike.RotateSprite180();
+        tempWidth += float(spike.GetWidth());
+    }
 }

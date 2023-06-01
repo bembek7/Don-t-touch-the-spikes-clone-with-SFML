@@ -13,16 +13,17 @@ public:
         sprite.setScale(scaleFactor, scaleFactor);
         height = sprite.getGlobalBounds().height;
     }
+    void RotateSprite180();
     bool PlayerHit(const BoxCollider& playerCollider) const;
     void Draw(sf::RenderWindow& window) const;
-    static unsigned int GetWidth();
-    float GetHeight();
+    unsigned int GetWidth() const;
+    float GetHeight() const;
     void SetPosition(const sf::Vector2f& pos);
 
 private:
     BoxCollider collider;
     sf::Sprite sprite;
-    static const unsigned int width = 25;
+    unsigned int width = 25;
     float scaleFactor;
     float height;
 };
