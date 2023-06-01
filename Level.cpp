@@ -68,7 +68,7 @@ void Level::CreateUpperLowerSpikes()
 
     for (auto& spike : upperSpikes)
     {
-        spike.SetPosition(sf::Vector2f(tempWidth, spike.GetHeight()));
+        spike.SetPosition(sf::Vector2f(tempWidth, 0));
         spike.RotateSprite180();
         tempWidth += float(spike.GetWidth());
     }

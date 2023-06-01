@@ -12,6 +12,7 @@ public:
         scaleFactor = width / sprite.getLocalBounds().width;
         sprite.setScale(scaleFactor, scaleFactor);
         height = sprite.getGlobalBounds().height;
+        collider = BoxCollider(0, 0, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
     }
     void RotateSprite180();
     bool PlayerHit(const BoxCollider& playerCollider) const;

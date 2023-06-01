@@ -2,6 +2,7 @@
 
 void Spike::RotateSprite180()
 {
+    sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y + GetHeight());
     sprite.setScale(sprite.getScale().x, sprite.getScale().y*-1);
 }
 
@@ -18,7 +19,7 @@ void Spike::Draw(sf::RenderWindow &window) const
 void Spike::SetPosition(const sf::Vector2f& pos)
 {
     sprite.setPosition(pos);
-    collider = BoxCollider(pos.x, pos.y, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
+    collider.SetPosition(pos.x, pos.y);
 }
 
 float Spike::GetHeight() const
