@@ -43,6 +43,22 @@ void Level::CheckCollison(Player &player) const
         }
     }
     // kolejne pętle z bocznymi
+
+    if(leftWall.CheckCollision(player.GetCollider()))
+    {
+        player.TurnRight();
+        //generowanie prawej ściany
+        //increment ilość odbić - score
+        return;
+    }
+
+    if(rightWall.CheckCollision(player.GetCollider()))
+    {
+        player.TurnLeft();
+        //generowanie lewej ściany
+        //increment ilość odbić - score
+        return;
+    }
 }
 
 void Level::CreateUpperLowerSpikes()
@@ -69,7 +85,7 @@ void Level::CreateUpperLowerSpikes()
     for (auto& spike : upperSpikes)
     {
         spike.SetPosition(sf::Vector2f(tempWidth, 0));
-        spike.RotateSprite180();
+        spike.RotateSprite180X();
         tempWidth += float(spike.GetWidth());
     }
 }

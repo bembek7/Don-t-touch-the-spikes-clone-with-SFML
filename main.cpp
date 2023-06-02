@@ -53,7 +53,7 @@ int main()
             continue;
         }
 
-        player.Update(deltaTime, width, height);
+        player.Update(deltaTime);
         window.clear(sf::Color(0,255,0,255));
         level.CheckCollison(player);
         level.Draw(window);

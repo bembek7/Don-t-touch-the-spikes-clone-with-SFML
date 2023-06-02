@@ -11,12 +11,15 @@ public:
         sprite.setTexture(tex);
         sprite.setScale(0.06f, 0.06f);
         sprite.setPosition(200.f,300.f);
-        collider = BoxCollider(0, 0, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
+        collider = BoxCollider(sprite.getPosition().x, sprite.getPosition().y, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
     }
     BoxCollider GetCollider()const;
-    void Update(const float& deltaTime, const float& windowWidth, const float& windowHeight);
+    void Update(const float& deltaTime);
     void Draw(sf::RenderWindow& window) const;
     void Die();
+    void TurnLeft();
+    void TurnRight();
+    void RotateSprite180Y();
 private:
     BoxCollider collider;
     sf::Sprite sprite;

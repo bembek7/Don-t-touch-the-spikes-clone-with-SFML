@@ -6,7 +6,7 @@ BoxCollider Player::GetCollider() const
 {
     return collider;
 }
-void Player::Update(const float &deltaTime, const float &windowWidth, const float &windowHeight)
+void Player::Update(const float &deltaTime)
 {
     timeFromLastJump += deltaTime;
     sf::Vector2f velocity(1.0f, 0.0f);
@@ -38,32 +38,10 @@ void Player::Update(const float &deltaTime, const float &windowWidth, const floa
         float c = -2 * gravity * jump;
         velocity.y -=  (- b + std::sqrt(b * b - 4 * a * c)) / (2 * a);
     }
-
-    // flipping after hitting right wall
-    if(sprite.getPosition().x + sprite.getTextureRect().width * std::abs(sprite.getScale().x) >= windowWidth && flipToLeft)
-    {
-        flipToLeft = false;
-        dir = -1;
-        sprite.setScale(sprite.getScale().x*-1, sprite.getScale().y);
-        sprite.move(sprite.getTextureRect().width * std::abs(sprite.getScale().x), 0.f);
-        flipToRight = true;
-    }
-    // flipping after hitting left wall
-    else if(sprite.getPosition().x + sprite.getTextureRect().width * sprite.getScale().x < 0 && flipToRight)
-    {
-        flipToRight = false;
-        dir = 1;
-        sprite.setScale(sprite.getScale().x*-1, sprite.getScale().y);
-        sprite.move(sprite.getTextureRect().width * sprite.getScale().x * -1, 0.f);
-        flipToLeft = true;
-    }
-
-    // has to be last, probably won't be needed after adding spikes on the bottom
-    // applying gravity if player is not on the floor
-    if(sprite.getPosition().y + sprite.getTextureRect().height * sprite.getScale().y + gravity * deltaTime < windowHeight)
-        velocity.y += gravity;
+    velocity.y += gravity;
     sprite.move(velocity * deltaTime);
-    collider.SetPosition(sprite.getPosition().x, sprite.getPosition().y);
+    if(dir < 0) collider.SetPosition(sprite.getPosition().x + sprite.getTextureRect().width * sprite.getScale().x, sprite.getPosition().y);
+    else collider.SetPosition(sprite.getPosition());
 }
 
 void Player::Draw(sf::RenderWindow& window) const
@@ -75,3 +53,25 @@ void Player::Die()
 {   
     std::cout<<"Player died!"<<std::endl;
 }
+
+void Player::TurnLeft()
+{
+    flipToLeft = false;
+    dir = -1;
+    RotateSprite180Y();
+    flipToRight = true;
+}
+
+void Player::TurnRight()
+{
+    flipToRight = false;
+    dir = 1;
+    RotateSprite180Y();
+    flipToLeft = true;
+}
+
+void Player::RotateSprite180Y()
+{
+    sprite.setScale(sprite.getScale().x*-1, sprite.getScale().y);
+}
+

@@ -14,6 +14,8 @@ public:
         tex = spikeTexture;
         mapWidth = width;
         mapHeight = height;
+        leftWall = BoxCollider(0, 0, 1, height);
+        rightWall = BoxCollider(width-1, 0, 1, height);
         CreateUpperLowerSpikes();
     }
     void DrawUpperSpikes(sf::RenderWindow &window) const;
@@ -22,6 +24,8 @@ public:
     void CheckCollison(Player& player) const;
 
 private:
+    BoxCollider leftWall;
+    BoxCollider rightWall;
     void CreateUpperLowerSpikes();
     sf::Texture tex;
     float mapWidth;

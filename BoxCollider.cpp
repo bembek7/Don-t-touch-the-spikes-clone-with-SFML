@@ -6,12 +6,24 @@ void BoxCollider::SetPosition(const int &X, const int &Y)
     y = Y;
 }
 
+void BoxCollider::SetPosition(const sf::Vector2f &pos)
+{   
+    x = pos.x;
+    y = pos.y;
+}
+
+void BoxCollider::Move(const sf::Vector2f &offset)
+{   
+    x += offset.x;
+    y += offset.y;
+}
+
 bool BoxCollider::CheckCollision(const BoxCollider &otherCollider) const
 {   
     bool xOverlap = int(x + width) >= otherCollider.GetPosition().x && int(otherCollider.GetPosition().x + otherCollider.GetWidth()) >= x;
     bool yOverlap = int(y + height) >= otherCollider.GetPosition().y && int(otherCollider.GetPosition().y + otherCollider.height) >= y;
 
-    return xOverlap && yOverlap;
+    return xOverlap && yOverlap && isActive;
 }
 
 sf::Vector2i BoxCollider::GetPosition() const
@@ -27,4 +39,9 @@ unsigned int BoxCollider::GetWidth() const
 unsigned int BoxCollider::GetHeight() const
 {
     return height;
+}
+
+void BoxCollider::SetActive(const bool &active)
+{
+    isActive = active;
 }

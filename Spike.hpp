@@ -14,12 +14,14 @@ public:
         height = sprite.getGlobalBounds().height;
         collider = BoxCollider(0, 0, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
     }
-    void RotateSprite180();
+    void RotateSprite180X();
     bool PlayerHit(const BoxCollider& playerCollider) const;
     void Draw(sf::RenderWindow& window) const;
     unsigned int GetWidth() const;
     float GetHeight() const;
     void SetPosition(const sf::Vector2f& pos);
+    void SetVisibile(const bool& vis);
+    bool GetVisibile() const;
 
 private:
     BoxCollider collider;
@@ -27,6 +29,7 @@ private:
     unsigned int width = 25;
     float scaleFactor;
     float height;
+    bool isVisible = true;
 };
 
 #endif // SPIKE_H
