@@ -20,13 +20,9 @@ public:
     void TurnLeft();
     void TurnRight();
     void RotateSprite180Y();
-    bool GetLeft() const;
-    bool GetRight() const;
-    void SetLeft(const bool& newLeft);
-    void SetRight(const bool& newRight);
-    bool GetFlipLeft() const;
-    bool GetFlipRight() const;
-
+    bool getAlive() const;
+    void setAlive(const bool& newAlive);
+    
 private:
     BoxCollider collider;
     sf::Sprite sprite;
@@ -38,6 +34,7 @@ private:
     bool realesedJumpButton = true;
     float jumpCooldown = 0.07f;
     float timeFromLastJump = 0.07f;
+    bool isAlive = true;
 };
 
 #endif // PLAYER_H

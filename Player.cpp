@@ -51,7 +51,8 @@ void Player::Draw(sf::RenderWindow& window) const
 
 void Player::Die()
 {   
-    std::cout<<"Player died!"<<std::endl;
+    std::cout << "Player died" << std::endl;
+    isAlive = false;
 }
 
 void Player::TurnLeft()
@@ -69,4 +70,14 @@ void Player::TurnRight()
 void Player::RotateSprite180Y()
 {
     sprite.setScale(sprite.getScale().x*-1, sprite.getScale().y);
+}
+
+bool Player::getAlive() const
+{
+    return isAlive;
+}
+
+void Player::setAlive(const bool& newAlive)
+{
+    isAlive = newAlive;
 }
