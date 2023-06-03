@@ -60,7 +60,7 @@ int main()
 
         if (!player.getAlive())
         {
-            startGame = false;
+            //startGame = false;
         }
     
         player.Update(deltaTime);

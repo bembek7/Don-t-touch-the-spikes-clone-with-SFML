@@ -17,8 +17,9 @@ public:
         rightWall = BoxCollider(width-1, 0, 1, height);
         CreateUpperLowerSpikes();
         CreateLeftRightSpikes();
-        safeSpotWidth = playerHeight * 3 / upperSpikes[0].GetWidth() + 1;
+        safeSpotWidth = playerHeight * 2.5f / upperSpikes[0].GetWidth() + 1;
         MakeWallInvisibile(rightSpikes);
+        MakeWallInvisibile(leftSpikes);
     }
     void DrawUpperSpikes(sf::RenderWindow &window) const;
     void DrawLowerSpikes(sf::RenderWindow &window) const;
@@ -31,15 +32,18 @@ private:
     BoxCollider leftWall;
     BoxCollider rightWall;
     void MakeWallInvisibile(std::vector<Spike> &wall);
+    void MoveSpikeWall(std::vector<Spike> &wall, const int& offset);
     void CreateUpperLowerSpikes();
     void CreateLeftRightSpikes();
     void ChangeLeftRightSpikes(std::vector<Spike>& wall);
     sf::Texture tex;
     float mapWidth;
     float mapHeight;
+    int offsetToWall = 0;
     unsigned int safeSpotWidth; // it's in spikes
-    unsigned int safeSpots;
+    unsigned int safeSpots = 2;
     unsigned int spikesToCreate = 0;
+    unsigned int score = 0;
     std::vector <Spike> upperSpikes;
     std::vector <Spike> lowerSpikes;
     std::vector <Spike> leftSpikes;

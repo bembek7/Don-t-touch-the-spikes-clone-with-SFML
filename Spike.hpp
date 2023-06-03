@@ -9,7 +9,8 @@ public:
     Spike(const sf::Texture& tex)
     {
         sprite.setTexture(tex);
-        scaleFactor = width / sprite.getLocalBounds().width;
+        int spriteWidth = width-5;
+        scaleFactor = spriteWidth / sprite.getLocalBounds().width;
         sprite.setScale(scaleFactor, scaleFactor);
         height = sprite.getGlobalBounds().height;
         collider = BoxCollider(0, 0, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
@@ -24,14 +25,12 @@ public:
     bool GetVisibile() const;
     void RotateSprite90();
     void RotateSprite270();
-    void SetIndex(const unsigned int& newIndex);
-    unsigned int GetIndex() const;
+    void Move(const sf::Vector2f& offset);
 
 private:
     BoxCollider collider;
     sf::Sprite sprite;
     unsigned int width = 34;
-    unsigned int index = 0;
     float scaleFactor;
     float height;
     bool isVisible = true;

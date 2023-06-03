@@ -65,19 +65,25 @@ void Level::CheckCollison(Player &player)
 
     if(leftWall.CheckCollision(player.GetCollider()))
     {
-        spikesToCreate++;
+        if(spikesToCreate < leftSpikes.size()-safeSpots * safeSpotWidth)spikesToCreate++;
+        score++;
         player.TurnRight();
         ChangeLeftRightSpikes(rightSpikes);
-        //increment ilość odbić - score
+        MakeWallInvisibile(leftSpikes);
+        MoveSpikeWall(leftSpikes, offsetToWall*-1);
+        if(score % 10 == 0 && safeSpots > 1) safeSpots--;
         return;
     }
 
     if(rightWall.CheckCollision(player.GetCollider()))
     {
-        spikesToCreate++;
+        if(spikesToCreate < leftSpikes.size()-safeSpots * safeSpotWidth)spikesToCreate++;
+        score++;
         player.TurnLeft();
         ChangeLeftRightSpikes(leftSpikes);
-        // increment ilość odbić - score
+        MakeWallInvisibile(rightSpikes);
+        MoveSpikeWall(rightSpikes, offsetToWall*-1);
+        if(score % 10 == 0 && safeSpots > 1) safeSpots--;
         return;
     }
 }
@@ -114,7 +120,6 @@ void Level::CreateUpperLowerSpikes()
 void Level::CreateLeftRightSpikes()
 {
     float tempHeight = mapHeight;
-    unsigned int pos = 0;
     while (tempHeight > 0)
     {
         Spike leftspike(tex);
@@ -124,12 +129,9 @@ void Level::CreateLeftRightSpikes()
             tempHeight = leftspike.GetHeight();
             break;
         }
-        leftspike.SetIndex(pos);
-        rightspike.SetIndex(pos);
         leftSpikes.push_back(leftspike);
         rightSpikes.push_back(rightspike);
         tempHeight -= float(leftspike.GetWidth());
-        pos++;
     }
 
     for (auto& spike : leftSpikes)
@@ -154,11 +156,21 @@ void Level::ChangeLeftRightSpikes(std::vector<Spike>& wall)
 {
     std::random_device dev;
 	std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> distSpikeWidth(0, leftSpikes[0].GetWidth()/2);
+    offsetToWall = distSpikeWidth(rng);
+    if(offsetToWall % 2) offsetToWall *= -1;
+    MoveSpikeWall(wall, offsetToWall);
     MakeWallInvisibile(wall);
     std::vector<unsigned int> positions;
-    for (auto& spike : wall)
+    for (unsigned int i = 0; i < wall.size(); i++)
     {
-        positions.push_back(spike.GetIndex());
+        positions.push_back(i);
+    }
+    for (unsigned int i = 0; i < safeSpots; i++)
+    {
+        std::uniform_int_distribution<std::mt19937::result_type> dist(0, positions.size()-1-safeSpotWidth);
+        unsigned int rand = dist(rng);
+        positions.erase(positions.begin() + rand, positions.begin() + rand + safeSpotWidth);
     }
     std::shuffle(std::begin(positions), std::end(positions), rng);
     for (unsigned int i = 0; i < spikesToCreate; i++)
@@ -173,7 +185,14 @@ void Level::MakeWallInvisibile(std::vector<Spike>& wall)
 {
     for (auto& spike : wall)
     {
-        // need only for start for right wall
         spike.SetVisibile(false);
+    }
+}
+
+void Level::MoveSpikeWall(std::vector<Spike> &wall, const int& offset)
+{
+    for (auto& spike : wall)
+    {
+        spike.Move(sf::Vector2f(0, offset));
     }
 }

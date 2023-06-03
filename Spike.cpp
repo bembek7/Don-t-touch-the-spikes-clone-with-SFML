@@ -16,14 +16,10 @@ void Spike::RotateSprite270()
     sprite.setRotation(270.0f);
 }
 
-void Spike::SetIndex(const unsigned int &newIndex)
+void Spike::Move(const sf::Vector2f& offset)
 {
-    index = newIndex;
-}
-
-unsigned int Spike::GetIndex() const
-{
-    return index;
+    sprite.move(offset);
+    collider.Move(offset);
 }
 
 bool Spike::PlayerHit(const BoxCollider &playerCollider) const
