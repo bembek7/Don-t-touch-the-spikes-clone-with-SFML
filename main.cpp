@@ -47,6 +47,8 @@ int main()
         {
             window.clear(sf::Color(0,255,0,255));
             level.Draw(window);
+            level.DrawLeftSpikes(window);
+            level.DrawRightSpikes(window);
             player.Draw(window);
             window.display();
             // Poczekaj, aż gracz wciśnie lewy przycisk myszy

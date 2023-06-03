@@ -22,7 +22,8 @@ public:
     void SetPosition(const sf::Vector2f& pos);
     void SetVisibile(const bool& vis);
     bool GetVisibile() const;
-
+    void RotateSprite90();
+    void RotateSprite270();
 private:
     BoxCollider collider;
     sf::Sprite sprite;

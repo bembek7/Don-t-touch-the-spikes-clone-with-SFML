@@ -6,6 +6,16 @@ void Spike::RotateSprite180X()
     sprite.setScale(sprite.getScale().x, sprite.getScale().y*-1);
 }
 
+void Spike::RotateSprite90()
+{
+    sprite.setRotation(90.0f);
+}
+
+void Spike::RotateSprite270()
+{
+    sprite.setRotation(270.0f);
+}
+
 bool Spike::PlayerHit(const BoxCollider &playerCollider) const
 {
     return collider.CheckCollision(playerCollider);

@@ -17,6 +17,22 @@ void Level::DrawLowerSpikes(sf::RenderWindow &window) const
     }
 }
 
+void Level::DrawLeftSpikes(sf::RenderWindow &window) const
+{
+    for (auto& spike : leftSpikes)
+    {
+        spike.Draw(window);
+    }
+}
+
+void Level::DrawRightSpikes(sf::RenderWindow &window) const
+{
+    for (auto& spike : rightSpikes)
+    {
+        spike.Draw(window);
+    }
+}
+
 void Level::Draw(sf::RenderWindow &window) const
 {
     DrawLowerSpikes(window);
@@ -88,4 +104,40 @@ void Level::CreateUpperLowerSpikes()
         spike.RotateSprite180X();
         tempWidth += float(spike.GetWidth());
     }
+}
+
+void Level::CreateLeftRightSpikes()
+{
+    float tempHeight = mapHeight;
+
+    while (tempHeight > 0)
+    {
+        Spike leftspike(tex);
+        Spike rightspike(tex);
+        if (tempHeight <= 2 * leftspike.GetHeight() + leftspike.GetWidth())
+        {
+            tempHeight = leftspike.GetHeight();
+            break;
+        }
+        leftSpikes.push_back(leftspike);
+        rightSpikes.push_back(rightspike);
+        tempHeight -= float(leftspike.GetWidth());
+    }
+
+    for (auto& spike : leftSpikes)
+    {
+        spike.SetPosition(sf::Vector2f(spike.GetHeight(), tempHeight));
+        spike.RotateSprite90();
+        tempHeight += float(spike.GetWidth());
+    }
+    Spike spike(tex);
+    tempHeight = spike.GetHeight() + spike.GetWidth();
+
+    for (auto& spike : rightSpikes)
+    {
+        spike.SetPosition(sf::Vector2f(mapWidth - spike.GetHeight(), tempHeight));
+        spike.RotateSprite270();
+        tempHeight += float(spike.GetWidth());
+    }
+
 }

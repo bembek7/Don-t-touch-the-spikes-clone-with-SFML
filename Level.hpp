@@ -17,9 +17,12 @@ public:
         leftWall = BoxCollider(0, 0, 1, height);
         rightWall = BoxCollider(width-1, 0, 1, height);
         CreateUpperLowerSpikes();
+        CreateLeftRightSpikes();
     }
     void DrawUpperSpikes(sf::RenderWindow &window) const;
     void DrawLowerSpikes(sf::RenderWindow &window) const;
+    void DrawLeftSpikes(sf::RenderWindow &window) const;
+    void DrawRightSpikes(sf::RenderWindow &window) const;
     void Draw(sf::RenderWindow &window) const;
     void CheckCollison(Player& player) const;
 
@@ -27,11 +30,14 @@ private:
     BoxCollider leftWall;
     BoxCollider rightWall;
     void CreateUpperLowerSpikes();
+    void CreateLeftRightSpikes();
     sf::Texture tex;
     float mapWidth;
     float mapHeight;
     std::vector <Spike> upperSpikes;
     std::vector <Spike> lowerSpikes;
+    std::vector <Spike> leftSpikes;
+    std::vector <Spike> rightSpikes;
 };
 
 #endif // LEVEL_H
