@@ -1,6 +1,6 @@
 #include "Spike.hpp"
 #include "Level.hpp"
-
+#include <random>
 void Level::DrawUpperSpikes(sf::RenderWindow &window) const
 {
     for (auto& spike : upperSpikes)
@@ -21,7 +21,7 @@ void Level::DrawLeftSpikes(sf::RenderWindow &window) const
 {
     for (auto& spike : leftSpikes)
     {
-        spike.Draw(window);
+        if(spike.GetVisibile())spike.Draw(window);
     }
 }
 
@@ -29,7 +29,7 @@ void Level::DrawRightSpikes(sf::RenderWindow &window) const
 {
     for (auto& spike : rightSpikes)
     {
-        spike.Draw(window);
+        if(spike.GetVisibile())spike.Draw(window);
     }
 }
 
@@ -37,9 +37,11 @@ void Level::Draw(sf::RenderWindow &window) const
 {
     DrawLowerSpikes(window);
     DrawUpperSpikes(window);
+    DrawLeftSpikes(window);
+    DrawRightSpikes(window);
 }
 
-void Level::CheckCollison(Player &player, sf::RenderWindow &window) const
+void Level::CheckCollison(Player &player)
 {
     for (auto& spike : lowerSpikes)
     {
@@ -60,30 +62,21 @@ void Level::CheckCollison(Player &player, sf::RenderWindow &window) const
     }
     // kolejne pętle z bocznymi
 
-    if(leftWall.CheckCollision(player.GetCollider()) || player.GetRight())
+    if(leftWall.CheckCollision(player.GetCollider()))
     {
-        if (player.GetFlipRight())
-        {
-            player.TurnRight();
-            player.SetLeft(false);
-            player.SetRight(true);
-        }
-        
-        DrawRightSpikes(window);
+        player.TurnRight();
+        ChangeLeftRightSpikes(rightSpikes);
+        // zmiana kolców po drugiej
         //increment ilość odbić - score
         return;
     }
 
-    if(rightWall.CheckCollision(player.GetCollider()) || player.GetLeft())
+    if(rightWall.CheckCollision(player.GetCollider()))
     {
-        if (player.GetFlipLeft())
-        {
-            player.TurnLeft();
-            player.SetRight(false);
-            player.SetLeft(true);
-        }
-        DrawLeftSpikes(window);
-        //increment ilość odbić - score
+        player.TurnLeft();
+        ChangeLeftRightSpikes(leftSpikes);
+        // zmiana kolców po drugiej
+        // increment ilość odbić - score
         return;
     }
 }
@@ -151,4 +144,24 @@ void Level::CreateLeftRightSpikes()
         tempHeight += float(spike.GetWidth());
     }
 
+}
+
+void Level::ChangeLeftRightSpikes(std::vector<Spike>& wall)
+{
+    for (auto& spike : wall)
+    {
+        // coś mądrego potem
+        int g = std::rand();
+        if(g%2)spike.SetVisibile(true);
+        else  spike.SetVisibile(false);
+    }
+}
+
+void Level::MakeWallInvisibile(std::vector<Spike>& wall)
+{
+    for (auto& spike : wall)
+    {
+        // need only for start for right wall
+        spike.SetVisibile(false);
+    }
 }

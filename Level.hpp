@@ -18,19 +18,22 @@ public:
         rightWall = BoxCollider(width-1, 0, 1, height);
         CreateUpperLowerSpikes();
         CreateLeftRightSpikes();
+        MakeWallInvisibile(rightSpikes);
     }
     void DrawUpperSpikes(sf::RenderWindow &window) const;
     void DrawLowerSpikes(sf::RenderWindow &window) const;
     void DrawLeftSpikes(sf::RenderWindow &window) const;
     void DrawRightSpikes(sf::RenderWindow &window) const;
     void Draw(sf::RenderWindow &window) const;
-    void CheckCollison(Player& player, sf::RenderWindow &window) const;
+    void CheckCollison(Player& player);
 
 private:
     BoxCollider leftWall;
     BoxCollider rightWall;
+    void MakeWallInvisibile(std::vector<Spike> &wall);
     void CreateUpperLowerSpikes();
     void CreateLeftRightSpikes();
+    void ChangeLeftRightSpikes(std::vector<Spike>& wall);
     sf::Texture tex;
     float mapWidth;
     float mapHeight;

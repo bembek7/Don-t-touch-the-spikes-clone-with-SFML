@@ -34,14 +34,10 @@ private:
     float speed = 250.f;
     float gravity = 450.f;
     float jump = 6.f;
-    bool flipToLeft = true;
-    bool flipToRight = false;
     bool canJump = true;
     bool realesedJumpButton = true;
     float jumpCooldown = 0.07f;
     float timeFromLastJump = 0.07f;
-    bool isLeft = false;
-    bool isRight = false;
 };
 
 #endif // PLAYER_H

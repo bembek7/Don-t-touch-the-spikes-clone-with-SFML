@@ -56,51 +56,17 @@ void Player::Die()
 
 void Player::TurnLeft()
 {
-    flipToLeft = false;
     dir = -1;
     RotateSprite180Y();
-    flipToRight = true;
 }
 
 void Player::TurnRight()
 {
-    flipToRight = false;
     dir = 1;
     RotateSprite180Y();
-    flipToLeft = true;
 }
 
 void Player::RotateSprite180Y()
 {
     sprite.setScale(sprite.getScale().x*-1, sprite.getScale().y);
-}
-
-bool Player::GetLeft() const
-{
-    return isLeft;
-}
-
-bool Player::GetRight() const
-{
-    return isRight;
-}
-
-void Player::SetLeft(const bool& newLeft)
-{
-    isLeft = newLeft;
-}
-
-void Player::SetRight(const bool& newRight)
-{
-    isRight = newRight;
-}
-
-bool Player::GetFlipLeft() const
-{
-    return flipToLeft;
-}
-
-bool Player::GetFlipRight() const
-{
-    return flipToRight;
 }

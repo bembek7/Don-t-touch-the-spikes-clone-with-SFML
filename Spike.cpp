@@ -18,7 +18,7 @@ void Spike::RotateSprite270()
 
 bool Spike::PlayerHit(const BoxCollider &playerCollider) const
 {
-    return collider.CheckCollision(playerCollider);
+    return isVisible && collider.CheckCollision(playerCollider);
 }
 
 void Spike::Draw(sf::RenderWindow &window) const
