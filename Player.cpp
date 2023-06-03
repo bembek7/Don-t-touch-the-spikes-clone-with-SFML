@@ -51,7 +51,8 @@ void Player::Draw(sf::RenderWindow& window) const
 
 void Player::Die()
 {   
-    std::cout<<"Player died!"<<std::endl;
+    std::cout << "Player died" << std::endl;
+    isAlive = false;
 }
 
 void Player::TurnLeft()
@@ -74,4 +75,14 @@ void Player::RotateSprite180Y()
 float Player::GetHeight() const
 {
     return sprite.getTextureRect().height * std::abs(sprite.getScale().y);
+}
+
+bool Player::getAlive() const
+{
+    return isAlive;
+}
+
+void Player::setAlive(const bool& newAlive)
+{
+    isAlive = newAlive;
 }

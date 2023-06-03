@@ -21,7 +21,9 @@ public:
     void TurnRight();
     void RotateSprite180Y();
     float GetHeight() const;
-
+    bool getAlive() const;
+    void setAlive(const bool& newAlive);
+    
 private:
     BoxCollider collider;
     sf::Sprite sprite;
@@ -33,6 +35,7 @@ private:
     bool realesedJumpButton = true;
     float jumpCooldown = 0.07f;
     float timeFromLastJump = 0.07f;
+    bool isAlive = true;
 };
 
 #endif // PLAYER_H

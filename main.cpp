@@ -22,6 +22,11 @@ int main()
     bool startGame = false;
     sf::Clock clock;
 
+    // Przycisk "Game Over"
+    sf::RectangleShape gameOverButton(sf::Vector2f(200.0f, 50.0f));
+    gameOverButton.setFillColor(sf::Color::Red);
+    gameOverButton.setPosition(100.0f, 100.0f);
+
     while (window.isOpen())
     {
         deltaTime = clock.restart().asSeconds();
@@ -51,6 +56,11 @@ int main()
             window.display();
             // Poczekaj, aż gracz wciśnie lewy przycisk myszy
             continue;
+        }
+
+        if (!player.getAlive())
+        {
+            startGame = false;
         }
     
         player.Update(deltaTime);
