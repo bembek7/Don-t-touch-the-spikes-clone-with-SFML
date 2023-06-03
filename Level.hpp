@@ -26,7 +26,7 @@ public:
     void DrawLeftSpikes(sf::RenderWindow &window) const;
     void DrawRightSpikes(sf::RenderWindow &window) const;
     void Draw(sf::RenderWindow &window) const;
-    void CheckCollison(Player& player);
+    void CheckCollison(Player* player);
 
 private:
     BoxCollider leftWall;

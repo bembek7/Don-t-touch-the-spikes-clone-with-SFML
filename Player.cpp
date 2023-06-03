@@ -51,7 +51,6 @@ void Player::Draw(sf::RenderWindow& window) const
 
 void Player::Die()
 {   
-    std::cout << "Player died" << std::endl;
     isAlive = false;
 }
 

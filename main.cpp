@@ -6,23 +6,28 @@
 static const float height = 600;
 static const float width = 400;
 
+bool isMouseOverButton(const sf::RectangleShape& button, const sf::Vector2f& mousePos)
+{
+    sf::FloatRect buttonBounds = button.getGlobalBounds();
+    return buttonBounds.contains(mousePos);
+}
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(width, height), "Test", sf::Style::Titlebar | sf::Style::Close);
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     window.setPosition(sf::Vector2i(desktop.width / 2 - width / 2, desktop.height / 2 - height / 2));
-    sf::Texture playerTexture;
-    playerTexture.loadFromFile("Knight.png");
-    Player player(playerTexture);
+    sf::Texture* playerTexture = new sf::Texture();
+    playerTexture->loadFromFile("Knight.png");
+    Player* player = new Player(*playerTexture);
     sf::Texture spikeTexture;
     spikeTexture.loadFromFile("Pawn.png");
-    Level level(spikeTexture, width, height, player.GetHeight());
+    Level level(spikeTexture, width, height, player->GetHeight());
     float deltaTime = 0.0f;
     bool startGame = false;
     sf::Clock clock;
 
-    // Przycisk "Game Over"
+    // Game Over button
     sf::RectangleShape gameOverButton(sf::Vector2f(200.0f, 50.0f));
     gameOverButton.setFillColor(sf::Color::Red);
     gameOverButton.setPosition(100.0f, 100.0f);
@@ -43,31 +48,53 @@ int main()
             {
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
-                    startGame = true;
+                    sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+                    if (!player->getAlive() && isMouseOverButton(gameOverButton, mousePos))
+                    {
+                        delete player;
+                        delete playerTexture;
+                        sf::Texture* playerTexture = new sf::Texture();
+                        playerTexture->loadFromFile("Knight.png");
+                        player = new Player(*playerTexture);
+                        //level.Reset();
+                        startGame = false;
+
+                    }
+                    else
+                    {
+                        startGame = true;
+                    }
                 }
             }  
         }
+        if (!player->getAlive())
+            {
+                window.clear(sf::Color(0,255,0,255));
+                level.DrawUpperSpikes(window);
+                level.DrawLowerSpikes(window);
+                window.draw(gameOverButton);
+                player->Draw(window);
+                window.display();
+                // Poczekaj, aż gracz wciśnie czerwony przycisk
+                continue;
+            }
 
         if (!startGame)
         {
             window.clear(sf::Color(0,255,0,255));
-            level.Draw(window);
-            player.Draw(window);
+            level.DrawUpperSpikes(window);
+            level.DrawLowerSpikes(window);
+            player->Draw(window);
             window.display();
             // Poczekaj, aż gracz wciśnie lewy przycisk myszy
             continue;
         }
 
-        if (!player.getAlive())
-        {
-            //startGame = false;
-        }
-    
-        player.Update(deltaTime);
+        player->Update(deltaTime);
         window.clear(sf::Color(0,255,0,255));
         level.CheckCollison(player);
         level.Draw(window);
-        player.Draw(window);
+        player->Draw(window);
         window.display();
         
     }

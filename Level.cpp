@@ -42,32 +42,32 @@ void Level::Draw(sf::RenderWindow &window) const
     DrawRightSpikes(window);
 }
 
-void Level::CheckCollison(Player &player)
+void Level::CheckCollison(Player* player)
 {
     for (auto& spike : lowerSpikes)
     {
-        if(spike.PlayerHit(player.GetCollider()))
+        if(spike.PlayerHit(player->GetCollider()))
         {
-            player.Die();
+            player->Die();
             return;
         }
     }
 
     for (auto& spike : upperSpikes)
     {
-        if(spike.PlayerHit(player.GetCollider()))
+        if(spike.PlayerHit(player->GetCollider()))
         {
-            player.Die();
+            player->Die();
             return;
         }
     }
     // kolejne pętle z bocznymi
 
-    if(leftWall.CheckCollision(player.GetCollider()))
+    if(leftWall.CheckCollision(player->GetCollider()))
     {
         if(spikesToCreate < leftSpikes.size()-safeSpots * safeSpotWidth)spikesToCreate++;
         score++;
-        player.TurnRight();
+        player->TurnRight();
         ChangeLeftRightSpikes(rightSpikes);
         MakeWallInvisibile(leftSpikes);
         MoveSpikeWall(leftSpikes, offsetToWall*-1);
@@ -75,11 +75,11 @@ void Level::CheckCollison(Player &player)
         return;
     }
 
-    if(rightWall.CheckCollision(player.GetCollider()))
+    if(rightWall.CheckCollision(player->GetCollider()))
     {
         if(spikesToCreate < leftSpikes.size()-safeSpots * safeSpotWidth)spikesToCreate++;
         score++;
-        player.TurnLeft();
+        player->TurnLeft();
         ChangeLeftRightSpikes(leftSpikes);
         MakeWallInvisibile(rightSpikes);
         MoveSpikeWall(rightSpikes, offsetToWall*-1);
