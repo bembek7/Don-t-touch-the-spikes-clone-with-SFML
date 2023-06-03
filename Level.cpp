@@ -39,7 +39,7 @@ void Level::Draw(sf::RenderWindow &window) const
     DrawUpperSpikes(window);
 }
 
-void Level::CheckCollison(Player &player) const
+void Level::CheckCollison(Player &player, sf::RenderWindow &window) const
 {
     for (auto& spike : lowerSpikes)
     {
@@ -60,18 +60,29 @@ void Level::CheckCollison(Player &player) const
     }
     // kolejne pętle z bocznymi
 
-    if(leftWall.CheckCollision(player.GetCollider()))
+    if(leftWall.CheckCollision(player.GetCollider()) || player.GetRight())
     {
-        player.TurnRight();
-        //generowanie prawej ściany
+        if (player.GetFlipRight())
+        {
+            player.TurnRight();
+            player.SetLeft(false);
+            player.SetRight(true);
+        }
+        
+        DrawRightSpikes(window);
         //increment ilość odbić - score
         return;
     }
 
-    if(rightWall.CheckCollision(player.GetCollider()))
+    if(rightWall.CheckCollision(player.GetCollider()) || player.GetLeft())
     {
-        player.TurnLeft();
-        //generowanie lewej ściany
+        if (player.GetFlipLeft())
+        {
+            player.TurnLeft();
+            player.SetRight(false);
+            player.SetLeft(true);
+        }
+        DrawLeftSpikes(window);
         //increment ilość odbić - score
         return;
     }

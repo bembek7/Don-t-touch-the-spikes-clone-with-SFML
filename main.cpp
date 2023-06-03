@@ -47,17 +47,15 @@ int main()
         {
             window.clear(sf::Color(0,255,0,255));
             level.Draw(window);
-            level.DrawLeftSpikes(window);
-            level.DrawRightSpikes(window);
             player.Draw(window);
             window.display();
             // Poczekaj, aż gracz wciśnie lewy przycisk myszy
             continue;
         }
-
+    
         player.Update(deltaTime);
         window.clear(sf::Color(0,255,0,255));
-        level.CheckCollison(player);
+        level.CheckCollison(player, window);
         level.Draw(window);
         player.Draw(window);
         window.display();
