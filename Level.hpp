@@ -5,11 +5,10 @@
 #include "Spike.hpp"
 #include "BoxCollider.hpp"
 #include "Player.hpp"
-
 class Level
 {
 public:
-    Level(const sf::Texture& spikeTexture, const float& width, const float& height)
+    Level(const sf::Texture& spikeTexture, const float& width, const float& height, const float& playerHeight)
     {
         tex = spikeTexture;
         mapWidth = width;
@@ -18,6 +17,7 @@ public:
         rightWall = BoxCollider(width-1, 0, 1, height);
         CreateUpperLowerSpikes();
         CreateLeftRightSpikes();
+        safeSpotWidth = playerHeight * 3 / upperSpikes[0].GetWidth() + 1;
         MakeWallInvisibile(rightSpikes);
     }
     void DrawUpperSpikes(sf::RenderWindow &window) const;
@@ -37,6 +37,9 @@ private:
     sf::Texture tex;
     float mapWidth;
     float mapHeight;
+    unsigned int safeSpotWidth; // it's in spikes
+    unsigned int safeSpots;
+    unsigned int spikesToCreate = 0;
     std::vector <Spike> upperSpikes;
     std::vector <Spike> lowerSpikes;
     std::vector <Spike> leftSpikes;

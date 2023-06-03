@@ -9,7 +9,7 @@ public:
     Player(const sf::Texture& tex)
     {
         sprite.setTexture(tex);
-        sprite.setScale(0.06f, 0.06f);
+        sprite.setScale(0.046f, 0.046f);
         sprite.setPosition(200.f,300.f);
         collider = BoxCollider(sprite.getPosition().x, sprite.getPosition().y, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
     }
@@ -20,12 +20,7 @@ public:
     void TurnLeft();
     void TurnRight();
     void RotateSprite180Y();
-    bool GetLeft() const;
-    bool GetRight() const;
-    void SetLeft(const bool& newLeft);
-    void SetRight(const bool& newRight);
-    bool GetFlipLeft() const;
-    bool GetFlipRight() const;
+    float GetHeight() const;
 
 private:
     BoxCollider collider;

@@ -24,10 +24,14 @@ public:
     bool GetVisibile() const;
     void RotateSprite90();
     void RotateSprite270();
+    void SetIndex(const unsigned int& newIndex);
+    unsigned int GetIndex() const;
+
 private:
     BoxCollider collider;
     sf::Sprite sprite;
-    unsigned int width = 25;
+    unsigned int width = 34;
+    unsigned int index = 0;
     float scaleFactor;
     float height;
     bool isVisible = true;

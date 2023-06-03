@@ -1,5 +1,6 @@
 #include "Spike.hpp"
 #include "Level.hpp"
+#include <algorithm>
 #include <random>
 void Level::DrawUpperSpikes(sf::RenderWindow &window) const
 {
@@ -64,18 +65,18 @@ void Level::CheckCollison(Player &player)
 
     if(leftWall.CheckCollision(player.GetCollider()))
     {
+        spikesToCreate++;
         player.TurnRight();
         ChangeLeftRightSpikes(rightSpikes);
-        // zmiana kolców po drugiej
         //increment ilość odbić - score
         return;
     }
 
     if(rightWall.CheckCollision(player.GetCollider()))
     {
+        spikesToCreate++;
         player.TurnLeft();
         ChangeLeftRightSpikes(leftSpikes);
-        // zmiana kolców po drugiej
         // increment ilość odbić - score
         return;
     }
@@ -113,7 +114,7 @@ void Level::CreateUpperLowerSpikes()
 void Level::CreateLeftRightSpikes()
 {
     float tempHeight = mapHeight;
-
+    unsigned int pos = 0;
     while (tempHeight > 0)
     {
         Spike leftspike(tex);
@@ -123,9 +124,12 @@ void Level::CreateLeftRightSpikes()
             tempHeight = leftspike.GetHeight();
             break;
         }
+        leftspike.SetIndex(pos);
+        rightspike.SetIndex(pos);
         leftSpikes.push_back(leftspike);
         rightSpikes.push_back(rightspike);
         tempHeight -= float(leftspike.GetWidth());
+        pos++;
     }
 
     for (auto& spike : leftSpikes)
@@ -148,13 +152,21 @@ void Level::CreateLeftRightSpikes()
 
 void Level::ChangeLeftRightSpikes(std::vector<Spike>& wall)
 {
+    std::random_device dev;
+	std::mt19937 rng(dev());
+    MakeWallInvisibile(wall);
+    std::vector<unsigned int> positions;
     for (auto& spike : wall)
     {
-        // coś mądrego potem
-        int g = std::rand();
-        if(g%2)spike.SetVisibile(true);
-        else  spike.SetVisibile(false);
+        positions.push_back(spike.GetIndex());
     }
+    std::shuffle(std::begin(positions), std::end(positions), rng);
+    for (unsigned int i = 0; i < spikesToCreate; i++)
+    {
+        wall[positions.back()].SetVisibile(true);
+        positions.pop_back();
+    }
+
 }
 
 void Level::MakeWallInvisibile(std::vector<Spike>& wall)

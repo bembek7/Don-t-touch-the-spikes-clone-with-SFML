@@ -16,6 +16,16 @@ void Spike::RotateSprite270()
     sprite.setRotation(270.0f);
 }
 
+void Spike::SetIndex(const unsigned int &newIndex)
+{
+    index = newIndex;
+}
+
+unsigned int Spike::GetIndex() const
+{
+    return index;
+}
+
 bool Spike::PlayerHit(const BoxCollider &playerCollider) const
 {
     return isVisible && collider.CheckCollision(playerCollider);

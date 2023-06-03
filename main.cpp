@@ -17,7 +17,7 @@ int main()
     Player player(playerTexture);
     sf::Texture spikeTexture;
     spikeTexture.loadFromFile("Pawn.png");
-    Level level(spikeTexture, width, height);
+    Level level(spikeTexture, width, height, player.GetHeight());
     float deltaTime = 0.0f;
     bool startGame = false;
     sf::Clock clock;

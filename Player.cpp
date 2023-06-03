@@ -70,3 +70,8 @@ void Player::RotateSprite180Y()
 {
     sprite.setScale(sprite.getScale().x*-1, sprite.getScale().y);
 }
+
+float Player::GetHeight() const
+{
+    return sprite.getTextureRect().height * std::abs(sprite.getScale().y);
+}
