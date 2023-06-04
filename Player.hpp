@@ -6,6 +6,7 @@
 class Player
 {
 public:
+    Player () = default;
     Player(const sf::Texture& tex)
     {
         sprite.setTexture(tex);
@@ -32,7 +33,7 @@ private:
     sf::Sprite sprite;
     float dir = 1.f;
     float speed = 250.f;
-    float gravity = 450.f;
+    float gravity = 400.f;
     float jump = 6.f;
     bool canJump = true;
     bool realesedJumpButton = true;

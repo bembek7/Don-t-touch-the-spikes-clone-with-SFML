@@ -74,6 +74,16 @@ void Level::CheckCollison(Player& player)
     }
 }
 
+void Level::Reset()
+{
+    MakeWallInvisibile(rightSpikes);
+    MakeWallInvisibile(leftSpikes);
+    offsetToWall = 0;
+    safeSpots = 2;
+    spikesToCreate = 0;
+    score = 0;
+}
+
 void Level::CreateUpperLowerSpikes()
 {
     float tempWidth = mapWidth;

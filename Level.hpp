@@ -5,9 +5,11 @@
 #include "Spike.hpp"
 #include "BoxCollider.hpp"
 #include "Player.hpp"
+#include <iostream>
 class Level
 {
 public:
+    Level() = default;
     Level(const sf::Texture& spikeTexture, const float& width, const float& height, const float& playerHeight)
     {
         tex = spikeTexture;
@@ -27,7 +29,7 @@ public:
     void DrawRightSpikes(sf::RenderWindow &window) const;
     void Draw(sf::RenderWindow &window) const;
     void CheckCollison(Player& player);
-
+    void Reset();
 private:
     BoxCollider leftWall;
     BoxCollider rightWall;
