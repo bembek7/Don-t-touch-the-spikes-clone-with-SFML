@@ -8,6 +8,7 @@ void Spike::RotateSprite180X()
 
 void Spike::RotateSprite90()
 {
+    sprite.setPosition(sprite.getPosition().x + GetHeight(), sprite.getPosition().y);
     unsigned int collHeight = collider.GetHeight();
     collider.SetHeight(collider.GetWidth());
     collider.SetWidth(collHeight);
@@ -16,6 +17,7 @@ void Spike::RotateSprite90()
 
 void Spike::RotateSprite270()
 {
+    sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y + GetWidth());
     unsigned int collHeight = collider.GetHeight();
     collider.SetHeight(collider.GetWidth());
     collider.SetWidth(collHeight);

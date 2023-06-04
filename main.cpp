@@ -66,8 +66,7 @@ int main()
         if (!player.getAlive())
         {
             window.clear(sf::Color(0,255,0,255));
-            level.DrawUpperSpikes(window);
-            level.DrawLowerSpikes(window);
+            level.Draw(window);
             window.draw(gameOverButton);
             player.Draw(window);
             window.display();
@@ -78,8 +77,7 @@ int main()
         if (!startGame)
         {
             window.clear(sf::Color(0,255,0,255));
-            level.DrawUpperSpikes(window);
-            level.DrawLowerSpikes(window);
+            level.Draw(window);
             player.Draw(window);
             window.display();
             // Poczekaj, aż gracz wciśnie lewy przycisk myszy

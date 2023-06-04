@@ -122,7 +122,7 @@ void Level::CreateLeftRightSpikes()
 
     for (auto& spike : leftSpikes)
     {
-        spike.SetPosition(sf::Vector2f(spike.GetHeight(), tempHeight));
+        spike.SetPosition(sf::Vector2f(0, tempHeight));
         spike.RotateSprite90();
         tempHeight += float(spike.GetWidth());
     }
