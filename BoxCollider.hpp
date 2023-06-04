@@ -22,6 +22,8 @@ public:
     unsigned int GetWidth() const;
     unsigned int GetHeight() const;
     void SetActive(const bool& active);
+    void SetWidth(const unsigned int& Width);
+    void SetHeight(const unsigned int& Height);
 
     //void Update(const float& deltaTime, const float& windowWidth, const float& windowHeight);
 private:

@@ -26,13 +26,14 @@ public:
     void DrawLeftSpikes(sf::RenderWindow &window) const;
     void DrawRightSpikes(sf::RenderWindow &window) const;
     void Draw(sf::RenderWindow &window) const;
-    void CheckCollison(Player* player);
+    void CheckCollison(Player& player);
 
 private:
     BoxCollider leftWall;
     BoxCollider rightWall;
     void MakeWallInvisibile(std::vector<Spike> &wall);
-    void MoveSpikeWall(std::vector<Spike> &wall, const int& offset);
+    void SpikeWallCollision(std::vector<Spike> &wall, Player& player) const;
+    void MoveSpikeWall(std::vector<Spike> &wall, const int &offset);
     void CreateUpperLowerSpikes();
     void CreateLeftRightSpikes();
     void ChangeLeftRightSpikes(std::vector<Spike>& wall);

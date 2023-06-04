@@ -8,11 +8,17 @@ void Spike::RotateSprite180X()
 
 void Spike::RotateSprite90()
 {
+    unsigned int collHeight = collider.GetHeight();
+    collider.SetHeight(collider.GetWidth());
+    collider.SetWidth(collHeight);
     sprite.setRotation(90.0f);
 }
 
 void Spike::RotateSprite270()
 {
+    unsigned int collHeight = collider.GetHeight();
+    collider.SetHeight(collider.GetWidth());
+    collider.SetWidth(collHeight);
     sprite.setRotation(270.0f);
 }
 
@@ -41,6 +47,7 @@ void Spike::SetPosition(const sf::Vector2f& pos)
 void Spike::SetVisibile(const bool &vis)
 {
     isVisible = vis;
+    collider.SetActive(vis);
 }
 
 bool Spike::GetVisibile() const

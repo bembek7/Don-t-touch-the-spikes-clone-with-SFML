@@ -45,3 +45,13 @@ void BoxCollider::SetActive(const bool &active)
 {
     isActive = active;
 }
+
+void BoxCollider::SetWidth(const unsigned int &Width)
+{
+    width = Width;
+}
+
+void BoxCollider::SetHeight(const unsigned int &Height)
+{
+    height = Height;
+}
