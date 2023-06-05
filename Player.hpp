@@ -28,6 +28,7 @@ public:
     bool getAlive() const;
     void setAlive(const bool& newAlive);
     void Reset();
+    void IncreaseSpeed();
 private:
     BoxCollider collider;
     sf::Sprite sprite;

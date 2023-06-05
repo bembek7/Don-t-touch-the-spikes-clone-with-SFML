@@ -54,6 +54,7 @@ void Level::CheckCollison(Player& player)
         if(spikesToCreate < leftSpikes.size()-safeSpots * safeSpotWidth)spikesToCreate++;
         score++;
         player.TurnRight();
+        player.IncreaseSpeed();
         ChangeLeftRightSpikes(rightSpikes);
         MakeWallInvisibile(leftSpikes);
         MoveSpikeWall(leftSpikes, offsetToWall*-1);
@@ -66,6 +67,7 @@ void Level::CheckCollison(Player& player)
         if(spikesToCreate < leftSpikes.size()-safeSpots * safeSpotWidth)spikesToCreate++;
         score++;
         player.TurnLeft();
+        player.IncreaseSpeed();
         ChangeLeftRightSpikes(leftSpikes);
         MakeWallInvisibile(rightSpikes);
         MoveSpikeWall(rightSpikes, offsetToWall*-1);

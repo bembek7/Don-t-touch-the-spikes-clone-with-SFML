@@ -98,3 +98,8 @@ void Player::Reset()
     sprite.setPosition(200.f,300.f);
     collider.SetPosition(sprite.getPosition().x, sprite.getPosition().y);
 }
+
+void Player::IncreaseSpeed()
+{   
+    speed += 5;
+}
