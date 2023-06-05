@@ -13,8 +13,8 @@ void Game::Play()
     sf::RectangleShape gameOverButton = sf::RectangleShape(sf::Vector2f(200.0f, 50.0f));
     gameOverButton.setFillColor(sf::Color::Red);
     gameOverButton.setPosition(100.0f, 100.0f);
-
-    window.clear(sf::Color(0,255,0,255));
+    sf::Color backgroundColor = sf::Color(211,48,49,0);
+    window.clear(backgroundColor);
     level.Draw(window);
     player.Draw(window);
     window.display();
@@ -38,7 +38,7 @@ void Game::Play()
                         player.Reset();
                         level.Reset();
                         startGame = false;
-                        window.clear(sf::Color(0,255,0,255));
+                        window.clear(backgroundColor);
                         level.Draw(window);
                         player.Draw(window);
                         window.display();
@@ -60,7 +60,7 @@ void Game::Play()
             continue;
         }
         player.Update(deltaTime);
-        window.clear(sf::Color(0,255,0,255));
+        window.clear(backgroundColor);
         level.CheckCollison(player);
         level.Draw(window);
         player.Draw(window);
