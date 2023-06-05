@@ -211,3 +211,30 @@ void Level::DrawPoints(sf::RenderWindow &window, sf::Text &pointsText) const
     pointsText.setString("Points: " + std::to_string(score));
     window.draw(pointsText);
 }
+
+void Level::SaveScore(const std::string& filename)
+{
+    if (bestScores.size() < 10) 
+    {
+        bestScores.push_back(score);
+        std::sort(bestScores.begin(), bestScores.end(), std::greater<unsigned int>());
+    }
+    else
+    {
+        if (score > bestScores[9])
+        {
+            bestScores[9] = score;
+            std::sort(bestScores.begin(), bestScores.end(), std::greater<unsigned int>());
+        }
+    }
+
+    std::ofstream file(filename, std::ios::trunc);
+    if (file.is_open())
+    {
+        for (const auto& points : bestScores) {
+            file << points << "\n"; 
+        }
+        file.close();
+    }
+    else throw "Can not open file!";
+}

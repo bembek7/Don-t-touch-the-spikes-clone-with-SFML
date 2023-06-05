@@ -7,6 +7,8 @@
 #include "Player.hpp"
 #include <iostream>
 #include <memory>
+#include <fstream>
+#include <algorithm>
 
 class Level
 {
@@ -29,6 +31,7 @@ public:
     void CheckCollison(Player& player);
     void Reset();
     void DrawPoints(sf::RenderWindow &window, sf::Text &pointsText) const;
+    void SaveScore(const std::string& filename);
 private:
     BoxCollider leftWall;
     BoxCollider rightWall;
@@ -54,6 +57,7 @@ private:
     std::vector <std::unique_ptr<Spike>> lowerSpikes;
     std::vector <std::unique_ptr<Spike>> leftSpikes;
     std::vector <std::unique_ptr<Spike>> rightSpikes;
+    std::vector <unsigned int> bestScores;
 };
 
 #endif // LEVEL_H

@@ -23,6 +23,8 @@ void Game::Play()
     sf::Text pointsText("Points: 0", font, 24);
     pointsText.setFillColor(sf::Color::White);
     pointsText.setPosition(10.0f, 10.0f);
+    std::string filename = "best_scores.txt";
+    bool filesaved = false;
     sf::Color backgroundColor = sf::Color(211,48,49,0);
     window.clear(backgroundColor);
     level.Draw(window);
@@ -48,6 +50,7 @@ void Game::Play()
                     {
                         player.Reset();
                         level.Reset();
+                        filesaved = false;
                         startGame = false;
                         window.clear(backgroundColor);
                         level.Draw(window);
@@ -70,6 +73,11 @@ void Game::Play()
             window.draw(gameOverText);
             level.DrawPoints(window, pointsText);
             window.display();
+            if (!filesaved)
+            {
+                level.SaveScore(filename);
+                filesaved = true;
+            }    
             continue;
         }
         player.Update(deltaTime);
