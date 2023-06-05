@@ -6,6 +6,8 @@
 #include "BoxCollider.hpp"
 #include "Player.hpp"
 #include <iostream>
+#include <memory>
+
 class Level
 {
 public:
@@ -19,26 +21,26 @@ public:
         rightWall = BoxCollider(width-1, 0, 1, height);
         CreateUpperLowerSpikes();
         CreateLeftRightSpikes();
-        safeSpotWidth = playerHeight * 2.5f / upperSpikes[0].GetWidth() + 1;
+        safeSpotWidth = playerHeight * 2.5f / upperSpikes[0]->GetWidth() + 1;
         MakeWallInvisibile(rightSpikes);
         MakeWallInvisibile(leftSpikes);
     }
-    void DrawUpperSpikes(sf::RenderWindow &window) const;
-    void DrawLowerSpikes(sf::RenderWindow &window) const;
-    void DrawLeftSpikes(sf::RenderWindow &window) const;
-    void DrawRightSpikes(sf::RenderWindow &window) const;
     void Draw(sf::RenderWindow &window) const;
     void CheckCollison(Player& player);
     void Reset();
 private:
     BoxCollider leftWall;
     BoxCollider rightWall;
-    void MakeWallInvisibile(std::vector<Spike> &wall);
-    void SpikeWallCollision(std::vector<Spike> &wall, Player& player) const;
-    void MoveSpikeWall(std::vector<Spike> &wall, const int &offset);
+    void DrawUpperSpikes(sf::RenderWindow &window) const;
+    void DrawLowerSpikes(sf::RenderWindow &window) const;
+    void DrawLeftSpikes(sf::RenderWindow &window) const;
+    void DrawRightSpikes(sf::RenderWindow &window) const;
+    void MakeWallInvisibile(std::vector <std::unique_ptr<Spike>> &wall);
+    void SpikeWallCollision(std::vector <std::unique_ptr<Spike>> &wall, Player& player) const;
+    void MoveSpikeWall(std::vector <std::unique_ptr<Spike>> &wall, const int &offset);
     void CreateUpperLowerSpikes();
     void CreateLeftRightSpikes();
-    void ChangeLeftRightSpikes(std::vector<Spike>& wall);
+    void ChangeLeftRightSpikes(std::vector <std::unique_ptr<Spike>>& wall);
     sf::Texture tex;
     float mapWidth;
     float mapHeight;
@@ -47,10 +49,10 @@ private:
     unsigned int safeSpots = 2;
     unsigned int spikesToCreate = 0;
     unsigned int score = 0;
-    std::vector <Spike> upperSpikes;
-    std::vector <Spike> lowerSpikes;
-    std::vector <Spike> leftSpikes;
-    std::vector <Spike> rightSpikes;
+    std::vector <std::unique_ptr<Spike>> upperSpikes;
+    std::vector <std::unique_ptr<Spike>> lowerSpikes;
+    std::vector <std::unique_ptr<Spike>> leftSpikes;
+    std::vector <std::unique_ptr<Spike>> rightSpikes;
 };
 
 #endif // LEVEL_H

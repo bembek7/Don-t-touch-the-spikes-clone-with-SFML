@@ -6,7 +6,7 @@ void Level::DrawUpperSpikes(sf::RenderWindow &window) const
 {
     for (auto& spike : upperSpikes)
     {
-        spike.Draw(window);
+        spike->Draw(window);
     }
 }
 
@@ -14,7 +14,7 @@ void Level::DrawLowerSpikes(sf::RenderWindow &window) const
 {
     for (auto& spike : lowerSpikes)
     {
-        spike.Draw(window);
+        spike->Draw(window);
     }
 }
 
@@ -22,7 +22,7 @@ void Level::DrawLeftSpikes(sf::RenderWindow &window) const
 {
     for (auto& spike : leftSpikes)
     {
-        if(spike.GetVisibile())spike.Draw(window);
+        if(spike->GetVisibile())spike->Draw(window);
     }
 }
 
@@ -30,7 +30,7 @@ void Level::DrawRightSpikes(sf::RenderWindow &window) const
 {
     for (auto& spike : rightSpikes)
     {
-        if(spike.GetVisibile())spike.Draw(window);
+        if(spike->GetVisibile())spike->Draw(window);
     }
 }
 
@@ -89,27 +89,26 @@ void Level::CreateUpperLowerSpikes()
     float tempWidth = mapWidth;
     while (tempWidth > 0)
     {
-        Spike lowspike(tex);
-        Spike upspike(tex);
-        lowerSpikes.push_back(lowspike);
-        upperSpikes.push_back(upspike);
-        tempWidth -= float(lowspike.GetWidth());
+        auto spike = std::make_unique<Spike>(tex);
+        tempWidth -= float(spike->GetWidth());
+        lowerSpikes.push_back(std::move(spike));
+        upperSpikes.push_back(std::make_unique<Spike>(tex));
     }
     tempWidth = 0;
 
     for (auto& spike : lowerSpikes)
     {
-        spike.SetPosition(sf::Vector2f(tempWidth, mapHeight - spike.GetHeight()));
-        tempWidth += float(spike.GetWidth());
+        spike->SetPosition(sf::Vector2f(tempWidth, mapHeight - spike->GetHeight()));
+        tempWidth += float(spike->GetWidth());
     }
 
     tempWidth = 0;
 
     for (auto& spike : upperSpikes)
     {
-        spike.SetPosition(sf::Vector2f(tempWidth, 0));
-        spike.RotateSprite180X();
-        tempWidth += float(spike.GetWidth());
+        spike->SetPosition(sf::Vector2f(tempWidth, 0));
+        spike->RotateSprite180X();
+        tempWidth += float(spike->GetWidth());
     }
 }
 
@@ -118,41 +117,41 @@ void Level::CreateLeftRightSpikes()
     float tempHeight = mapHeight;
     while (tempHeight > 0)
     {
-        Spike leftspike(tex);
-        Spike rightspike(tex);
-        if (tempHeight <= 2 * leftspike.GetHeight() + leftspike.GetWidth())
+        auto leftspike = std::make_unique<Spike>(tex);
+        auto rightspike = std::make_unique<Spike>(tex);
+        if (tempHeight <= 2 * leftspike->GetHeight() + leftspike->GetWidth())
         {
-            tempHeight = leftspike.GetHeight();
+            tempHeight = leftspike->GetHeight();
             break;
         }
-        leftSpikes.push_back(leftspike);
-        rightSpikes.push_back(rightspike);
-        tempHeight -= float(leftspike.GetWidth());
+        tempHeight -= float(leftspike->GetWidth());
+        leftSpikes.push_back(std::move(leftspike));
+        rightSpikes.push_back(std::move(rightspike));
     }
 
     for (auto& spike : leftSpikes)
     {
-        spike.SetPosition(sf::Vector2f(0, tempHeight));
-        spike.RotateSprite90();
-        tempHeight += float(spike.GetWidth());
+        spike->SetPosition(sf::Vector2f(0, tempHeight));
+        spike->RotateSprite90();
+        tempHeight += float(spike->GetWidth());
     }
     Spike spike(tex);
     tempHeight = spike.GetHeight() + spike.GetWidth();
 
     for (auto& spike : rightSpikes)
     {
-        spike.SetPosition(sf::Vector2f(mapWidth - spike.GetHeight(), tempHeight));
-        spike.RotateSprite270();
-        tempHeight += float(spike.GetWidth());
+        spike->SetPosition(sf::Vector2f(mapWidth - spike->GetHeight(), tempHeight));
+        spike->RotateSprite270();
+        tempHeight += float(spike->GetWidth());
     }
 
 }
 
-void Level::ChangeLeftRightSpikes(std::vector<Spike>& wall)
+void Level::ChangeLeftRightSpikes(std::vector <std::unique_ptr<Spike>>& wall)
 {
     std::random_device dev;
 	std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> distSpikeWidth(0, leftSpikes[0].GetWidth()/2);
+    std::uniform_int_distribution<std::mt19937::result_type> distSpikeWidth(0, leftSpikes[0]->GetWidth()/2);
     offsetToWall = distSpikeWidth(rng);
     if(offsetToWall % 2) offsetToWall *= -1;
     MoveSpikeWall(wall, offsetToWall);
@@ -171,33 +170,33 @@ void Level::ChangeLeftRightSpikes(std::vector<Spike>& wall)
     std::shuffle(std::begin(positions), std::end(positions), rng);
     for (unsigned int i = 0; i < spikesToCreate; i++)
     {
-        wall[positions.back()].SetVisibile(true);
+        wall[positions.back()]->SetVisibile(true);
         positions.pop_back();
     }
 
 }
 
-void Level::MakeWallInvisibile(std::vector<Spike>& wall)
+void Level::MakeWallInvisibile(std::vector <std::unique_ptr<Spike>>& wall)
 {
     for (auto& spike : wall)
     {
-        spike.SetVisibile(false);
+        spike->SetVisibile(false);
     }
 }
 
-void Level::MoveSpikeWall(std::vector<Spike> &wall, const int& offset)
+void Level::MoveSpikeWall(std::vector <std::unique_ptr<Spike>>& wall, const int& offset)
 {
     for (auto& spike : wall)
     {
-        spike.Move(sf::Vector2f(0, offset));
+        spike->Move(sf::Vector2f(0, offset));
     }
 }
 
-void Level::SpikeWallCollision(std::vector<Spike> &wall, Player& player) const
+void Level::SpikeWallCollision(std::vector <std::unique_ptr<Spike>>& wall, Player& player) const
 {
     for (auto& spike : wall)
     {
-        if(spike.PlayerHit(player.GetCollider()))
+        if(spike->PlayerHit(player.GetCollider()))
         {
             player.Die();
             return;

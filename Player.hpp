@@ -15,7 +15,7 @@ public:
         collider = BoxCollider(sprite.getPosition().x, sprite.getPosition().y, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
     }
 
-     ~Player() {} // Destructor
+    ~Player() {} // Destructor
      
     BoxCollider GetCollider()const;
     void Update(const float& deltaTime);
