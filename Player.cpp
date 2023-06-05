@@ -8,6 +8,16 @@ BoxCollider Player::GetCollider() const
 }
 void Player::Update(const float &deltaTime)
 {
+    time += deltaTime;
+    //animation
+    if(time >= animInterval)
+    {
+        time = 0.f;
+        if(currTex < Texes.size()-1)currTex++;
+        else currTex = 0;
+        sprite.setTexture(Texes[currTex]);
+    }
+
     timeFromLastJump += deltaTime;
     sf::Vector2f velocity(1.0f, 0.0f);
     velocity.x *= dir;
@@ -97,6 +107,9 @@ void Player::Reset()
     isAlive = true;
     sprite.setPosition(200.f,300.f);
     collider.SetPosition(sprite.getPosition().x, sprite.getPosition().y);
+    time = 0.f;
+    currTex = 0;
+    sprite.setTexture(Texes[currTex]);
 }
 
 void Player::IncreaseSpeed()

@@ -7,7 +7,7 @@ void Game::Play()
     window.setPosition(sf::Vector2i(desktop.width / 2 - windowWidth / 2, desktop.height / 2 - windowHeight / 2));
     float deltaTime = 0.0f;
     bool startGame = false;
-    Player player = Player(playerTexture);;
+    Player player = Player(playerTextures);;
     Level level = Level(spikeTexture, windowWidth, windowHeight, player.GetHeight());
     sf::Clock clock;
     sf::RectangleShape gameOverButton = sf::RectangleShape(sf::Vector2f(200.0f, 50.0f));

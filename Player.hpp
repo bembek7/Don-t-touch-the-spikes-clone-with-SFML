@@ -2,15 +2,17 @@
 #define PLAYER_H
 #include <SFML/Graphics.hpp>
 #include "BoxCollider.hpp"
+#include <vector>
 
 class Player
 {
 public:
     Player () = default;
-    Player(const sf::Texture& tex)
+    Player(const std::vector<sf::Texture>& texes)
     {
-        sprite.setTexture(tex);
-        sprite.setScale(0.046f, 0.046f);
+        Texes = texes;
+        sprite.setTexture(Texes[0]);
+        sprite.setScale(3.f, 3.f);
         sprite.setPosition(200.f,300.f);
         collider = BoxCollider(sprite.getPosition().x, sprite.getPosition().y, sprite.getTextureRect().width * std::abs(sprite.getScale().x), sprite.getTextureRect().height * std::abs(sprite.getScale().y));
     }
@@ -30,6 +32,7 @@ public:
     void Reset();
     void IncreaseSpeed();
 private:
+    std::vector<sf::Texture> Texes;
     BoxCollider collider;
     sf::Sprite sprite;
     float dir = 1.f;
@@ -40,6 +43,9 @@ private:
     bool realesedJumpButton = true;
     float jumpCooldown = 0.07f;
     float timeFromLastJump = 0.07f;
+    float animInterval = 0.1f;
+    float time = 0.0f;
+    unsigned int currTex = 0;
     bool isAlive = true;
 };
 

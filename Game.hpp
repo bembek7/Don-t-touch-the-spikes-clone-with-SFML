@@ -9,11 +9,11 @@
 class Game
 {
 public:
-    Game(const unsigned int& WindowWidth, const unsigned int& WindowHeight, const std::string& playerTextureFilename, const std::string& spikeTextureFilename)
+    Game(const unsigned int& WindowWidth, const unsigned int& WindowHeight, const std::vector<sf::Texture>& texes, const std::string& spikeTextureFilename)
     {
         windowWidth = WindowWidth;
         windowHeight = WindowHeight;
-        playerTexture.loadFromFile(playerTextureFilename);
+        playerTextures = texes;
         spikeTexture.loadFromFile(spikeTextureFilename);
     }
 
@@ -21,7 +21,7 @@ public:
 
 private:
     sf::RenderWindow window;
-    sf::Texture playerTexture;
+    std::vector<sf::Texture> playerTextures;
     sf::Texture spikeTexture;
     unsigned int windowWidth;
     unsigned int windowHeight;
