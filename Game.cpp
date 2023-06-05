@@ -12,7 +12,14 @@ void Game::Play()
     sf::Clock clock;
     sf::RectangleShape gameOverButton = sf::RectangleShape(sf::Vector2f(200.0f, 50.0f));
     gameOverButton.setFillColor(sf::Color::Red);
-    gameOverButton.setPosition(100.0f, 100.0f);
+    gameOverButton.setPosition(80.0f, 105.0f);
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf")) {
+        throw "Wrong font!";
+    }
+    sf::Text gameOverText("Play Again", font, 24);
+    gameOverText.setFillColor(sf::Color::White);
+    gameOverText.setPosition(125.0f, 115.0f);
     sf::Color backgroundColor = sf::Color(211,48,49,0);
     window.clear(backgroundColor);
     level.Draw(window);
@@ -56,6 +63,7 @@ void Game::Play()
         if (!player.getAlive())
         {
             window.draw(gameOverButton);
+            window.draw(gameOverText);
             window.display();
             continue;
         }
