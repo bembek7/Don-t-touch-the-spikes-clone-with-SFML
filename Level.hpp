@@ -28,6 +28,7 @@ public:
     void Draw(sf::RenderWindow &window) const;
     void CheckCollison(Player& player);
     void Reset();
+    void DrawPoints(sf::RenderWindow &window, sf::Text &pointsText) const;
 private:
     BoxCollider leftWall;
     BoxCollider rightWall;

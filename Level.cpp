@@ -205,3 +205,9 @@ void Level::SpikeWallCollision(std::vector <std::unique_ptr<Spike>>& wall, Playe
         }
     }
 }
+
+void Level::DrawPoints(sf::RenderWindow &window, sf::Text &pointsText) const
+{
+    pointsText.setString("Points: " + std::to_string(score));
+    window.draw(pointsText);
+}

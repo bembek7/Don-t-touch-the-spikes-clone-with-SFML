@@ -20,9 +20,13 @@ void Game::Play()
     sf::Text gameOverText("Play Again", font, 24);
     gameOverText.setFillColor(sf::Color::White);
     gameOverText.setPosition(125.0f, 115.0f);
+    sf::Text pointsText("Points: 0", font, 24);
+    pointsText.setFillColor(sf::Color::White);
+    pointsText.setPosition(10.0f, 10.0f);
     sf::Color backgroundColor = sf::Color(211,48,49,0);
     window.clear(backgroundColor);
     level.Draw(window);
+    level.DrawPoints(window, pointsText);
     player.Draw(window);
     window.display();
 
@@ -64,6 +68,7 @@ void Game::Play()
         {
             window.draw(gameOverButton);
             window.draw(gameOverText);
+            level.DrawPoints(window, pointsText);
             window.display();
             continue;
         }
@@ -71,6 +76,7 @@ void Game::Play()
         window.clear(backgroundColor);
         level.CheckCollison(player);
         level.Draw(window);
+        level.DrawPoints(window, pointsText);
         player.Draw(window);
         window.display();
     }
