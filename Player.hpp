@@ -27,7 +27,7 @@ public:
     float GetHeight() const;
     bool getAlive() const;
     void setAlive(const bool& newAlive);
-    
+    void Reset();
 private:
     BoxCollider collider;
     sf::Sprite sprite;

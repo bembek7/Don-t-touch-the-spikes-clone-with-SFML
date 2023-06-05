@@ -35,7 +35,7 @@ void Game::Play()
                     sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
                     if (!player.getAlive() && isMouseOverButton(gameOverButton, mousePos))
                     {
-                        player = Player(playerTexture);
+                        player.Reset();
                         level.Reset();
                         startGame = false;
                         window.clear(sf::Color(0,255,0,255));

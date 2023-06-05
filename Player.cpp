@@ -85,3 +85,16 @@ void Player::setAlive(const bool& newAlive)
 {
     isAlive = newAlive;
 }
+
+void Player::Reset()
+{
+    if(dir < 0) TurnRight();
+    speed = 250.f;
+    canJump = true;
+    realesedJumpButton = true;
+    jumpCooldown = 0.07f;
+    timeFromLastJump = 0.07f;
+    isAlive = true;
+    sprite.setPosition(200.f,300.f);
+    collider.SetPosition(sprite.getPosition().x, sprite.getPosition().y);
+}
