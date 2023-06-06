@@ -26,3 +26,20 @@ Mechaniki do zaimplementowania:
 
 Technologia, której używamy: biblioteka SFML
 
+Krótki opis projektu:
+
+1. BoxCollider:
+   - reprezentuje prostokątny kolider, posiada metody umożliwiające ustawianie pozycji, szerokości i wysokości kolidera, sprawdzanie kolizji z innymi koliderami, pobieranie pozycji kolidera, oraz ustawianie stanu aktywności kolidera.
+
+2. Spike.hpp:
+   - reprezentuje kolec - przeszkodę dla gracza, kolce mogą być obracane i przesuwane, można sprawdzić kolizję z igraczem oraz ustawić ich widoczność.
+
+3. Player.hpp:
+   - reprezentuje gracza, zapewnia funkcjonalności związane z ruchem gracza, animacją oraz skokami.
+
+4. Level.hpp:
+   - reprezentuje poziom - mapę, po której porusza się gracz.
+   - zarządza kolcami na planszy, sprawdza kolizje z graczem, rysuje kolce oraz obsługuje logikę gry.
+
+5. Klasa Game:
+   - Klasa "Game" zarządza poziomami, aktualizuje logikę gry, obsługuje wejście użytkownika oraz renderuje grafikę.
