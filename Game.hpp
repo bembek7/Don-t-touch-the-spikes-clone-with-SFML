@@ -9,7 +9,7 @@
 class Game
 {
 public:
-    Game(const unsigned int& WindowWidth, const unsigned int& WindowHeight, const std::vector<sf::Texture>& texes, const std::string& spikeTextureFilename)
+    Game(unsigned int WindowWidth, unsigned int WindowHeight, const std::vector<sf::Texture>& texes, std::string spikeTextureFilename)
     {
         windowWidth = WindowWidth;
         windowHeight = WindowHeight;
@@ -27,6 +27,6 @@ private:
     unsigned int windowHeight;
 };
 
-bool isMouseOverButton(const sf::RectangleShape& button, const sf::Vector2f& mousePos);
+bool isMouseOverButton(sf::RectangleShape button, sf::Vector2f mousePos);
 
 #endif // GAME_H

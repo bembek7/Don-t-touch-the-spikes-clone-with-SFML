@@ -1,18 +1,18 @@
 #include "BoxCollider.hpp"
 
-void BoxCollider::SetPosition(const int &X, const int &Y)
+void BoxCollider::SetPosition(int X, int Y)
 {
     x = X;
     y = Y;
 }
 
-void BoxCollider::SetPosition(const sf::Vector2f &pos)
+void BoxCollider::SetPosition(sf::Vector2f pos)
 {   
     x = pos.x;
     y = pos.y;
 }
 
-void BoxCollider::Move(const sf::Vector2f &offset)
+void BoxCollider::Move(sf::Vector2f offset)
 {   
     x += offset.x;
     y += offset.y;
@@ -41,17 +41,17 @@ unsigned int BoxCollider::GetHeight() const
     return height;
 }
 
-void BoxCollider::SetActive(const bool &active)
+void BoxCollider::SetActive(bool active)
 {
     isActive = active;
 }
 
-void BoxCollider::SetWidth(const unsigned int &Width)
+void BoxCollider::SetWidth(unsigned int Width)
 {
     width = Width;
 }
 
-void BoxCollider::SetHeight(const unsigned int &Height)
+void BoxCollider::SetHeight(unsigned int Height)
 {
     height = Height;
 }

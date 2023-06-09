@@ -90,7 +90,7 @@ void Game::Play()
     }
 }
 
-bool isMouseOverButton(const sf::RectangleShape& button, const sf::Vector2f& mousePos)
+bool isMouseOverButton(sf::RectangleShape button, sf::Vector2f mousePos)
 {
     sf::FloatRect buttonBounds = button.getGlobalBounds();
     return buttonBounds.contains(mousePos);

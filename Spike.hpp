@@ -20,12 +20,12 @@ public:
     void Draw(sf::RenderWindow& window) const;
     unsigned int GetWidth() const;
     float GetHeight() const;
-    void SetPosition(const sf::Vector2f& pos);
-    void SetVisibile(const bool& vis);
+    void SetPosition(sf::Vector2f pos);
+    void SetVisibile(bool vis);
     bool GetVisibile() const;
     void RotateSprite90();
     void RotateSprite270();
-    void Move(const sf::Vector2f& offset);
+    void Move(sf::Vector2f offset);
 
 private:
     BoxCollider collider;

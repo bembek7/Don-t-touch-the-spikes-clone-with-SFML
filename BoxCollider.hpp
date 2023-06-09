@@ -6,7 +6,7 @@ class BoxCollider
 {
 public:
     BoxCollider() = default;
-    BoxCollider(const int& X, const int& Y,const unsigned int& Width, const unsigned int& Height):
+    BoxCollider(int X, int Y, unsigned int Width, unsigned int Height):
         x(X),
         y(Y),
         width(Width),
@@ -14,18 +14,17 @@ public:
     {
         ;
     }
-    void SetPosition(const int& X, const int& Y);
-    void SetPosition(const sf::Vector2f& pos);
-    void Move(const sf::Vector2f& offset);
+    void SetPosition(int X, int Y);
+    void SetPosition(sf::Vector2f pos);
+    void Move(sf::Vector2f offset);
     bool CheckCollision(const BoxCollider& otherCollider) const;
     sf::Vector2i GetPosition() const;
     unsigned int GetWidth() const;
     unsigned int GetHeight() const;
-    void SetActive(const bool& active);
-    void SetWidth(const unsigned int& Width);
-    void SetHeight(const unsigned int& Height);
+    void SetActive(bool active);
+    void SetWidth(unsigned int Width);
+    void SetHeight(unsigned int Height);
 
-    //void Update(const float& deltaTime, const float& windowWidth, const float& windowHeight);
 private:
     int x = 0;
     int y = 0;

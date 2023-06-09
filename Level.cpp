@@ -186,7 +186,7 @@ void Level::MakeWallInvisibile(std::vector <std::unique_ptr<Spike>>& wall)
     }
 }
 
-void Level::MoveSpikeWall(std::vector <std::unique_ptr<Spike>>& wall, const int& offset)
+void Level::MoveSpikeWall(std::vector <std::unique_ptr<Spike>>& wall, int offset)
 {
     for (auto& spike : wall)
     {
@@ -212,7 +212,7 @@ void Level::DrawPoints(sf::RenderWindow &window, sf::Text &pointsText) const
     window.draw(pointsText);
 }
 
-void Level::SaveScore(const std::string& filename)
+void Level::SaveScore(std::string filename)
 {
     if (bestScores.size() < 10) 
     {

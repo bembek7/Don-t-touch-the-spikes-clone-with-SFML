@@ -6,7 +6,7 @@ BoxCollider Player::GetCollider() const
 {
     return collider;
 }
-void Player::Update(const float &deltaTime)
+void Player::Update(float deltaTime)
 {
     time += deltaTime;
     //animation
@@ -91,7 +91,7 @@ bool Player::getAlive() const
     return isAlive;
 }
 
-void Player::setAlive(const bool& newAlive)
+void Player::setAlive(bool newAlive)
 {
     isAlive = newAlive;
 }

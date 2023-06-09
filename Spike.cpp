@@ -24,7 +24,7 @@ void Spike::RotateSprite270()
     sprite.setRotation(270.0f);
 }
 
-void Spike::Move(const sf::Vector2f& offset)
+void Spike::Move(sf::Vector2f offset)
 {
     sprite.move(offset);
     collider.Move(offset);
@@ -40,13 +40,13 @@ void Spike::Draw(sf::RenderWindow &window) const
     window.draw(sprite);
 }
 
-void Spike::SetPosition(const sf::Vector2f& pos)
+void Spike::SetPosition(sf::Vector2f pos)
 {
     sprite.setPosition(pos);
     collider.SetPosition(pos.x, pos.y);
 }
 
-void Spike::SetVisibile(const bool &vis)
+void Spike::SetVisibile(bool vis)
 {
     isVisible = vis;
     collider.SetActive(vis);

@@ -14,7 +14,7 @@ class Level
 {
 public:
     Level() = default;
-    Level(const sf::Texture& spikeTexture, const float& width, const float& height, const float& playerHeight)
+    Level(const sf::Texture& spikeTexture, float width, float height, float playerHeight)
     {
         tex = spikeTexture;
         mapWidth = width;
@@ -31,7 +31,7 @@ public:
     void CheckCollison(Player& player);
     void Reset();
     void DrawPoints(sf::RenderWindow &window, sf::Text &pointsText) const;
-    void SaveScore(const std::string& filename);
+    void SaveScore(std::string filename);
 private:
     BoxCollider leftWall;
     BoxCollider rightWall;
@@ -41,7 +41,7 @@ private:
     void DrawRightSpikes(sf::RenderWindow &window) const;
     void MakeWallInvisibile(std::vector <std::unique_ptr<Spike>> &wall);
     void SpikeWallCollision(std::vector <std::unique_ptr<Spike>> &wall, Player& player) const;
-    void MoveSpikeWall(std::vector <std::unique_ptr<Spike>> &wall, const int &offset);
+    void MoveSpikeWall(std::vector <std::unique_ptr<Spike>> &wall, int offset);
     void CreateUpperLowerSpikes();
     void CreateLeftRightSpikes();
     void ChangeLeftRightSpikes(std::vector <std::unique_ptr<Spike>>& wall);

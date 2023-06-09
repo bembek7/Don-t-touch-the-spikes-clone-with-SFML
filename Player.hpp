@@ -18,7 +18,7 @@ public:
     }
      
     BoxCollider GetCollider()const;
-    void Update(const float& deltaTime);
+    void Update(float deltaTime);
     void Draw(sf::RenderWindow& window) const;
     void Die();
     void TurnLeft();
@@ -26,7 +26,7 @@ public:
     void RotateSprite180Y();
     float GetHeight() const;
     bool getAlive() const;
-    void setAlive(const bool& newAlive);
+    void setAlive(bool newAlive);
     void Reset();
     void IncreaseSpeed();
 private:
