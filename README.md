@@ -19,7 +19,8 @@ Brief description of the project:
 
 4.Level.hpp:
    - represents the level - the map on which the player moves.
-   - manages spikes on the board, checks for collisions with the player, draws spikes and handles game logic.
+   - manages spikes on the board, spikes to be shown on the sides are chosen randomly but difficulty increases and game never gets unplayable there is always safe spot for player to bounce of, 
+   - checks for collisions with the player, draws spikes and handles game logic.
 
 5.Game class:
    - The "Game" class manages levels, updates game logic, handles user input, and renders graphics.
