@@ -1,45 +1,25 @@
-# PROI Projekt nr 5
+The project is a simple adaptation of the mobile game "Don't touch the spikes" for PC.
 
-Projekt polega na adaptacji na PC gry mobilnej "Don't touch the spikes".
-
-Screenshot z gry:
+Screenshot from the orginal game:
 
 ![Example game looks](./screenshots/example_game1.jpg)
 
-Gracz steruje ptakiem i jego celem jest jak najdłużej utrzymać się w grze, nie dotykając kolców.
-Ptak poddany jest sile symulującej grawitację więc ciągle spada w dół na kolce, jednocześnie również leci on w jedną stronę, a po odbiciu się od ściany w drugą. Gracz ma jedną opcje sterowania - nadanie siły, która wyrzuca ptaka do góry.
-Góra i dół są zawsze pokryte kolcami, a kolce na ścianach są generowane losowo po odbiciu się gracza od przeciwnej ściany.
+Technology we used: SFML library
 
-Mechaniki do zaimplementowania:
+Brief description of the project:
 
--stworzenia ptaka i poddanie go grawitacji,
-
--sprawienie, żeby ptak leciał do ściany i odbijał się od niej,
-
--input gracza - wyrzucenie ptaka w górę,
-
--generowanie kolców po odbiciu, zawsze tak, by gracz miał możliwość odbicia,
-
--zwiększanie prędkości gracza po każdym odbiciu.
-
--zapis/odczyt do/z pliku
-
-Technologia, której używamy: biblioteka SFML
-
-Krótki opis projektu:
-
-1. BoxCollider:
-   - reprezentuje prostokątny kolider, posiada metody umożliwiające ustawianie pozycji, szerokości i wysokości kolidera, sprawdzanie kolizji z innymi koliderami, pobieranie pozycji kolidera, oraz ustawianie stanu aktywności kolidera.
+1. Box Collider:
+   - represents a rectangular collider, has methods for setting the collider's position, width and height, checking for collisions with other colliders, retrieving the collider's position, and setting the collider's active state.
 
 2. Spike.hpp:
-   - reprezentuje kolec - przeszkodę dla gracza, kolce mogą być obracane i przesuwane, można sprawdzić kolizję z igraczem oraz ustawić ich widoczność.
+   - represents a spike - an obstacle for the player, spikes can be rotated and moved, you can check the collision with the player and set their visibility.
 
 3. Player.hpp:
-   - reprezentuje gracza, zapewnia funkcjonalności związane z ruchem gracza, animacją oraz skokami.
+   - represents the player, provides functionalities related to the player's movement, animation and jumping.
 
-4. Level.hpp:
-   - reprezentuje poziom - mapę, po której porusza się gracz.
-   - zarządza kolcami na planszy, sprawdza kolizje z graczem, rysuje kolce oraz obsługuje logikę gry.
+4.Level.hpp:
+   - represents the level - the map on which the player moves.
+   - manages spikes on the board, checks for collisions with the player, draws spikes and handles game logic.
 
-5. Klasa Game:
-   - Klasa "Game" zarządza poziomami, aktualizuje logikę gry, obsługuje wejście użytkownika oraz renderuje grafikę.
+5.Game class:
+   - The "Game" class manages levels, updates game logic, handles user input, and renders graphics.
