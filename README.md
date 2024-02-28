@@ -4,9 +4,9 @@ Screenshot from the orginal game:
 
 ![Example game looks](./screenshots/example_game1.jpg)
 
-Technology we used: SFML library
+### Technology we used: SFML library
 
-Brief description of the project:
+### Brief description of the project:
 
 1. Box Collider:
    - represents a rectangular collider, has methods for setting the collider's position, width and height, checking for collisions with other colliders, retrieving the collider's position, and setting the collider's active state.
